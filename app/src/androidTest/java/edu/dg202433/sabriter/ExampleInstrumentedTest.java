@@ -1,4 +1,4 @@
-package edu.dg202433.android_projet;
+package edu.dg202433.sabriter;
 
 import android.content.Context;
 

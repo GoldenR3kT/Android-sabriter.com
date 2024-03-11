@@ -1,4 +1,4 @@
-package edu.dg202433.android_projet;
+package edu.dg202433.sabriter;
 
 import org.junit.Test;
 
