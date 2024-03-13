@@ -3,4 +3,13 @@
     <string name="louer">Louer</string>
     <string name="acheter">Acheter</string>
     <string name="search">Entrez votre recherche</string>
+    <string name="ask_budget">Entrer votre budget</string>
+    <string name="check_appartment">Appartement</string>
+    <string name="check_house">Maison</string>
+    <string name="button_search">Rechercher</string>
+    <string name="ask_max_budget">Budget maximum</string>
+    <string name="ask_location">Entrer votre localisation</string>
+    <string name="title_location">Localisation</string>
+    <string name="title_logement">Trouver un logement</string>
+    <string name="myapp">SABRITER</string>
 </resources>
