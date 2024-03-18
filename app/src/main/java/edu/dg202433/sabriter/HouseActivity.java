@@ -1,9 +1,11 @@
 package edu.dg202433.sabriter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,6 +21,19 @@ public class HouseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.house_activity);
+
+        Button buttonGPS = findViewById(R.id.mapButton);
+        buttonGPS.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MapActivity.class);
+            startActivity(intent);
+        });
+
+        TextView title = findViewById(R.id.title);
+        title.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        });
+
 
         linearLayout = findViewById(R.id.linear_layout1); // Remplacez "imageView" par l'ID de votre ImageView
 
