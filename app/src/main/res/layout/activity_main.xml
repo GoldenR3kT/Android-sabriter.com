@@ -7,149 +7,181 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-        <LinearLayout
+        <View
             android:id="@+id/topbar"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:orientation="horizontal"
             android:background="@color/blue">
+        </View>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/myapp"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginStart="10dp"
+            app:layout_constraintTop_toTopOf="@id/topbar"
+            app:layout_constraintBottom_toBottomOf="@+id/topbar"
+            app:layout_constraintStart_toStartOf="parent"
+            />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/myapp"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:fontFamily="sans-serif-medium"
-                android:layout_gravity="center"
-                android:layout_marginStart="16dp"/>
+        <Button
+            android:id="@+id/mapButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GPS"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/blue2"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toTopOf="@id/topbar"
+            app:layout_constraintBottom_toBottomOf="@+id/topbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
 
-                <Button
-                    android:id="@+id/mapButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="GPS"
-                    android:textSize="20sp"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center"
-                    android:backgroundTint="@color/blue2"
-                    android:layout_marginStart="170dp"/>
 
-        </LinearLayout>
-
-        <LinearLayout
+        <View
             android:id="@+id/form"
             android:layout_width="380dp"
-            android:layout_height="wrap_content"
+            android:layout_height="380dp"
             android:orientation="vertical"
             android:background="@color/blue"
             android:layout_marginTop="25dp"
             app:layout_constraintTop_toBottomOf="@id/topbar"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent" />
 
-                <TextView
+        <TextView
+            android:id="@+id/titleLogement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_logement"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintTop_toTopOf="@id/form"
+            app:layout_constraintStart_toStartOf="@id/form"
+            app:layout_constraintEnd_toEndOf="@id/form"
+            />
+
+        <TextView
+            android:id="@+id/titleLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_location"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/titleLogement"
+            app:layout_constraintStart_toStartOf="@id/titleLogement"
+
+            />
+
+        <EditText
+            android:id="@+id/locationEditText"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:autofillHints="localisation"
+            android:inputType="text"
+            android:background="@drawable/edittextebackground"
+            android:hint="@string/ask_location"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/titleLocation"
+            app:layout_constraintStart_toStartOf="@id/form"
+            app:layout_constraintEnd_toEndOf="@id/form"/>
+
+        <TextView
+            android:id="@+id/titleBudget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ask_max_budget"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/locationEditText"
+            app:layout_constraintStart_toStartOf="@id/titleLocation"
+            />
+
+        <EditText
+            android:id="@+id/locationBudgetEditText"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:autofillHints="budget"
+            android:inputType="number"
+            android:background="@drawable/edittextebackground"
+            android:hint="@string/ask_budget"
+            app:layout_constraintTop_toBottomOf="@+id/titleBudget"
+            app:layout_constraintStart_toStartOf="@id/form"
+            app:layout_constraintEnd_toEndOf="@id/form"
+            />
+
+        <LinearLayout
+            android:id="@+id/checkBoxes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/locationBudgetEditText"
+            app:layout_constraintStart_toStartOf="@id/form"
+            app:layout_constraintEnd_toEndOf="@id/form">
+
+
+                <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/title_logement"
-                    android:textSize="24sp"
+                    android:text="@string/check_appartment"
+                    android:textSize="20sp"
                     android:textColor="@color/white"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"/>
+                    android:layout_gravity="center"/>
 
-                <TextView
+                <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/title_location"
+                    android:text="@string/check_house"
                     android:textSize="20sp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="70dp"
-                    android:layout_marginBottom="8dp"/>
+                    android:layout_marginStart="16dp"/>
 
-                <EditText
-                    android:id="@+id/locationEditText"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:autofillHints="localisation"
-                    android:inputType="text"
-                    android:background="@drawable/edittextebackground"
-                    android:hint="@string/ask_location"
-                    android:layout_marginBottom="8dp"/>
-
-                <TextView
+                <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ask_max_budget"
+                    android:text="Abris"
                     android:textSize="20sp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="50dp"
-                    android:layout_marginBottom="8dp"/>
-
-                <EditText
-                    android:id="@+id/locationBudgetEditText"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:autofillHints="budget"
-                    android:inputType="number"
-                    android:background="@drawable/edittextebackground"
-                    android:hint="@string/ask_budget"
-                    android:layout_marginBottom="8dp"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="8dp">
-
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/check_appartment"
-                            android:textSize="20sp"
-                            android:textColor="@color/white"
-                            android:layout_gravity="center"/>
-
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/check_house"
-                            android:textSize="20sp"
-                            android:textColor="@color/white"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="16dp"/>
-
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Abris"
-                            android:textSize="20sp"
-                            android:textColor="@color/white"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="16dp"/>
-
-                </LinearLayout>
-
-                <Button
-                    android:id="@+id/searchButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/button_search"
-                    android:textSize="20sp"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center"
-                    android:backgroundTint="@color/blue2"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"/>
+                    android:layout_marginStart="16dp"/>
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/searchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_search"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/blue2"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxes"
+            app:layout_constraintStart_toStartOf="@id/form"
+            app:layout_constraintEnd_toEndOf="@id/form"
+            />
 
 
 
