@@ -7,7 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        android:background="@drawable/tente">
+        android:background="@drawable/tente_test1"
+        android:id="@+id/linear_layout1">
 
         <Button
             android:id="@+id/slide_left"
@@ -37,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="25sp"
-        android:text="Tante"
+        android:text="Tente"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginHorizontal="15dp"
@@ -91,15 +92,6 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/item_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at erat massa. Donec laoreet, tellus nec luctus interdum, risus mauris ultricies velit, a tincidunt enim turpis a neque."
-        android:layout_marginVertical="15dp"
-        android:layout_marginHorizontal="20dp"
-        android:textSize="14sp"
-        android:layout_marginStart="15dp"/>
 
     <Button
         android:id="@+id/buy_button"
@@ -109,29 +101,30 @@
         android:layout_marginHorizontal="8dp"
         android:backgroundTint="#0CA4D3"
         android:text="Contacter le vendeur"
-        android:layout_marginBottom="15dp"/>
+        android:layout_marginTop="15dp"/>
 
 
     <TextView
-        android:id="@+id/caracteristics"
+        android:id="@+id/title_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="25sp"
-        android:text="Caractéristiques"
+        android:text="Description"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginHorizontal="15dp"
         android:layout_marginVertical="15dp"
         />
 
+
     <TextView
-        android:id="@+id/brand"
+        android:id="@+id/item_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:layout_marginStart="20dp"
-        android:text="Marque -"
-        android:textSize="16sp"
-        android:layout_marginVertical="5dp"/>
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at erat massa. Donec laoreet, tellus nec luctus interdum, risus mauris ultricies velit, a tincidunt enim turpis a neque."
+        android:layout_marginVertical="15dp"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="14sp"
+        android:layout_marginStart="15dp"/>
 
 </LinearLayout>

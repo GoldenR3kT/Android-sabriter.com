@@ -19,7 +19,6 @@
         android:theme="@style/Theme.Android_Projet"
         tools:targetApi="31">
 
-
         <activity
             android:name="edu.dg202433.sabriter.MainActivity"
             android:exported="true">
@@ -29,7 +28,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="edu.dg202433.sabriter.HouseActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="edu.dg202433.sabriter.MapActivity"
             android:exported="true">
@@ -39,6 +46,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
