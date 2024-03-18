@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:background="@drawable/tante">
+
+        <Button
+            android:id="@+id/slide_left"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="100dp"
+            android:backgroundTint="#0CA4D3"
+            android:text=""
+            android:alpha="0.8"/>
+
+        <Button
+            android:id="@+id/slide_right"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="290dp"
+            android:layout_marginTop="100dp"
+            android:backgroundTint="#0CA4D3"
+            android:text=""
+            android:alpha="0.8"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:text="Tante"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="15dp"
+        />
+
+    <TextView
+        android:id="@+id/item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="10 €"
+        android:layout_marginStart="15dp"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/item_pieces"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:text="1 pièces"
+            android:layout_marginStart="15dp"
+            />
+
+        <TextView
+            android:id="@+id/item_chambers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:text="1 chambre"
+            android:layout_marginStart="15dp"
+            />
+
+        <TextView
+            android:id="@+id/item_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:text="3 m²"
+            android:layout_marginStart="15dp"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/item_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at erat massa. Donec laoreet, tellus nec luctus interdum, risus mauris ultricies velit, a tincidunt enim turpis a neque."
+        android:layout_marginVertical="15dp"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="14sp"
+        android:layout_marginStart="15dp"/>
+
+    <Button
+        android:id="@+id/buy_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="8dp"
+        android:backgroundTint="#0CA4D3"
+        android:text="Contacter le vendeur"
+        android:layout_marginBottom="15dp"/>
+
+
+    <TextView
+        android:id="@+id/caracteristics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:text="Caractéristiques"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="15dp"
+        />
+
+    <TextView
+        android:id="@+id/brand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_marginStart="20dp"
+        android:text="Marque -"
+        android:textSize="16sp"
+        android:layout_marginVertical="5dp"/>
+
+</LinearLayout>
