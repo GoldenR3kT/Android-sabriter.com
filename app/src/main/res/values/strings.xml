@@ -12,4 +12,13 @@
     <string name="title_location">Localisation</string>
     <string name="title_logement">Trouver un logement</string>
     <string name="myapp">SABRITER</string>
+    <string name="name">name</string>
+    <string name="trier">Trier par</string>
+
+    <string-array name="tri">
+        <item>Plus récent</item>
+        <item>Plus ancien</item>
+        <item>Prix croissant</item>
+        <item>Prix décroissant</item>
+    </string-array>
 </resources>

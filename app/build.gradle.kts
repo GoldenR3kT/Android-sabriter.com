@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "edu.dg202433.android_projet"
-        minSdk = 25
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"

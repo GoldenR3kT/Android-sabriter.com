@@ -16,9 +16,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button buttonGPS = findViewById(R.id.mapButton);
+        Button searchButton = findViewById(R.id.searchButton);
+
         buttonGPS.setOnClickListener(v -> {
             Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
         });
+
+        searchButton.setOnClickListener(v -> {
+            setContentView(R.layout.activity_search);
+        });
     }
+
+
 }

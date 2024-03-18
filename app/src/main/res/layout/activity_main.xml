@@ -35,7 +35,7 @@
                     android:textColor="@color/white"
                     android:layout_gravity="center"
                     android:backgroundTint="@color/blue2"
-                    android:layout_marginStart="16dp"/>
+                    android:layout_marginStart="170dp"/>
 
         </LinearLayout>
 
@@ -77,7 +77,7 @@
                     android:layout_gravity="center"
                     android:autofillHints="localisation"
                     android:inputType="text"
-                    android:background="@drawable/edit_texte_background"
+                    android:background="@drawable/edittextebackground"
                     android:hint="@string/ask_location"
                     android:layout_marginBottom="8dp"/>
 
@@ -89,7 +89,6 @@
                     android:textColor="@color/white"
                     android:layout_gravity="center"
                     android:layout_marginEnd="50dp"
-
                     android:layout_marginBottom="8dp"/>
 
                 <EditText
@@ -99,28 +98,44 @@
                     android:layout_gravity="center"
                     android:autofillHints="budget"
                     android:inputType="number"
-                    android:background="@drawable/edit_texte_background"
+                    android:background="@drawable/edittextebackground"
                     android:hint="@string/ask_budget"
                     android:layout_marginBottom="8dp"/>
 
-                <CheckBox
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/check_appartment"
-                    android:textSize="20sp"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"/>
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp">
 
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/check_house"
-                    android:textSize="20sp"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"/>
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/check_appartment"
+                            android:textSize="20sp"
+                            android:textColor="@color/white"
+                            android:layout_gravity="center"/>
 
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/check_house"
+                            android:textSize="20sp"
+                            android:textColor="@color/white"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="16dp"/>
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Abris"
+                            android:textSize="20sp"
+                            android:textColor="@color/white"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="16dp"/>
+
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/searchButton"
