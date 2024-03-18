@@ -21,6 +21,16 @@
 
 
         <activity
+            android:name="edu.dg202433.sabriter.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name="edu.dg202433.sabriter.MapActivity"
             android:exported="true">
             <intent-filter>
