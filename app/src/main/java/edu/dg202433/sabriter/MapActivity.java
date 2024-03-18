@@ -69,10 +69,9 @@ public class MapActivity extends AppCompatActivity {
                         imageView.setAdjustViewBounds(true);
                         imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
                         imageView.setMaxWidth(700);
-                        imageView.setMaxHeight(900);
+                        imageView.setMaxHeight(550);
 
                         alertDialogBuilder.setView(imageView);
-
 
                         alertDialogBuilder
                                 .setMessage("message")
@@ -87,8 +86,6 @@ public class MapActivity extends AppCompatActivity {
 
 
                         AlertDialog alertDialog = alertDialogBuilder.create();
-
-
                         alertDialog.show();
                         return false;
                     }
@@ -102,7 +99,6 @@ public class MapActivity extends AppCompatActivity {
         mOverlay.setFocusItemsOnTap(true);
         map.getOverlays().add(mOverlay);
 
-
         TextView title = findViewById(R.id.title);
         title.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
@@ -112,10 +108,6 @@ public class MapActivity extends AppCompatActivity {
 
     @Override
     public void onPause() {
-
-
-
-
         super.onPause();
         map.onPause();
     }
