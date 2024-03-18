@@ -5,6 +5,8 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,9 +14,11 @@ import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 import edu.dg202433.android_projet.R;
 
-public class HouseActivity extends AppCompatActivity {
+public class HouseActivity extends AppCompatActivity implements PostExecuteActivity<Character>{
 
     private LinearLayout linearLayout;
     private final int[] images = {R.drawable.tente_test1, R.drawable.tente_test2, R.drawable.tente_test3};
@@ -29,6 +33,18 @@ public class HouseActivity extends AppCompatActivity {
 
         slideOutAnimation = (ObjectAnimator) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.slide_out);
         slideInAnimation = (ObjectAnimator) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.slide_in);
+
+
+        TextView title = findViewById(R.id.title);
+        title.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        });
+
+        String url = "https://github.com/GoldenR3kT/abri_data/blob/main/data.json";
+        //todo: try to change context from MainActivity.this in getApplicationContext()
+        new HttpAsyncGet<>(url, Shelter.class, this, new ProgressDialog(this) );
+
 
         linearLayout = findViewById(R.id.linear_layout1);
 
@@ -73,6 +89,15 @@ public class HouseActivity extends AppCompatActivity {
                 super.onAnimationEnd(animation);
                 linearLayout.setBackgroundResource(images[currentImageIndex]);
             }
+        });
+    }
+
+    @Override
+    public void onPostExecute(List<Character> itemList) {
+        itemList.forEach( shelter -> {
+            TextView textView = new TextView(this);
+            textView.setText(shelter.toString());
+            linearLayout.addView(textView);
         });
     }
 }
