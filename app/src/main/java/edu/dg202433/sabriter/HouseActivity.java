@@ -19,7 +19,7 @@ import java.util.List;
 
 import edu.dg202433.android_projet.R;
 
-public class HouseActivity extends AppCompatActivity implements PostExecuteActivity<Character>{
+public class HouseActivity extends AppCompatActivity{
 
     private LinearLayout linearLayout;
     private final int[] images = {R.drawable.tente_test1, R.drawable.tente_test2, R.drawable.tente_test3};
@@ -35,7 +35,6 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
         slideOutAnimation = (ObjectAnimator) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.slide_out);
         slideInAnimation = (ObjectAnimator) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.slide_in);
 
-
         TextView title = findViewById(R.id.title);
         title.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
@@ -44,7 +43,7 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
 
         String url = "https://github.com/GoldenR3kT/abri_data/blob/main/data.json";
         //todo: try to change context from MainActivity.this in getApplicationContext()
-        new HttpAsyncGet<>(url, House.class, this, new ProgressDialog(this) );
+      //  new HttpAsyncGet<>(url, House.class, this, new ProgressDialog(this) );
 
 
         linearLayout = findViewById(R.id.linear_layout1);
@@ -55,6 +54,8 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
         slideLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                slideOutAnimation.setFloatValues(0, 1000);
+                slideInAnimation.setFloatValues(-1000, 0);
                 showPreviousImage();
                 applySlideAnimations();
             }
@@ -63,6 +64,8 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
         slideRightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                slideOutAnimation.setFloatValues(0, -1000);
+                slideInAnimation.setFloatValues(1000, 0);
                 showNextImage();
                 applySlideAnimations();
             }
@@ -80,19 +83,23 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
     }
 
     private void applySlideAnimations() {
-        slideOutAnimation.setTarget(linearLayout);
-        slideInAnimation.setTarget(linearLayout);
-        slideOutAnimation.start();
-        slideInAnimation.start();
         slideOutAnimation.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
                 linearLayout.setBackgroundResource(images[currentImageIndex]);
+                linearLayout.setTranslationX(0);
+                slideInAnimation.start();
             }
         });
+        slideInAnimation.setTarget(linearLayout);
+        slideOutAnimation.setTarget(linearLayout);
+
+        slideOutAnimation.start();
     }
 
+
+    /*
     @Override
     public void onPostExecute(List<Character> itemList) {
         itemList.forEach( shelter -> {
@@ -101,4 +108,5 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
             linearLayout.addView(textView);
         });
     }
+    */
 }
