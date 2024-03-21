@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -43,7 +44,7 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
 
         String url = "https://github.com/GoldenR3kT/abri_data/blob/main/data.json";
         //todo: try to change context from MainActivity.this in getApplicationContext()
-        new HttpAsyncGet<>(url, Shelter.class, this, new ProgressDialog(this) );
+        new HttpAsyncGet<>(url, House.class, this, new ProgressDialog(this) );
 
 
         linearLayout = findViewById(R.id.linear_layout1);
