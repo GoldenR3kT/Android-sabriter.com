@@ -7,12 +7,11 @@ public interface HouseInterface extends Parcelable {
     String getName();
     String getAddress();
     float getValue();
-    int[] getPicture();
+    String[] getPicture();
     String getDescription();
     void setName(String name);
     void setAddress(String address);
-    void setContext(Context context);
     void setValue(float value);
-    void setPicture(int[] picture);
+    void setPicture(String[] picture);
     void setDescription(String description);
 }
