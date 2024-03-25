@@ -4,32 +4,27 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class House implements HouseInterface {
+    private int id;
     private String name;
-
-    private String address;
-    private Context context;
     private float value;
-
-    private int[] picture;
+    private String address;
+    private int nbRooms;
+    private int nbBedrooms;
+    private float surface;
+    private String[] picture;
 
     private String description;
 
-    public House(String name, String address, Context context, float value, int[] picture, String description) {
-        this.name = name;
-        this.address = address;
-        this.context = context;
-        this.value = value;
-        this.picture = picture;
-        this.description = description;
-    }
-
+    @JsonCreator
     public House(Parcel in) {
         this.name = in.readString();
         this.address = in.readString();
-        this.context = (Context) in.readValue(Context.class.getClassLoader());
         this.value = in.readFloat();
-        this.picture = in.createIntArray();
+        this.picture = in.createStringArray();
         this.description = in.readString();
     }
 
@@ -46,15 +41,12 @@ public class House implements HouseInterface {
         return address;
     }
 
-    public Context getContext() {
-        return context;
-    }
 
     public float getValue() {
         return value;
     }
 
-    public int[] getPicture() {
+    public String[] getPicture() {
         return picture;
     }
 
@@ -70,15 +62,12 @@ public class House implements HouseInterface {
         this.address = address;
     }
 
-    public void setContext(Context context) {
-        this.context = context;
-    }
 
     public void setValue(float value) {
         this.value = value;
     }
 
-    public void setPicture(int[] picture) {
+    public void setPicture(String[] picture) {
         this.picture = picture;
     }
 
@@ -87,7 +76,7 @@ public class House implements HouseInterface {
     }
 
     public String toString() {
-        return "Shelter{name=" + name + ", address=" + address + ", context=" + context + ", value=" + value + ", picture=" + picture + ", description=" + description + "}";
+        return "Shelter{name=" + name + ", address=" + address  + ", value=" + value + ", picture=" + picture + ", description=" + description + "}";
     }
 
     @Override
@@ -95,9 +84,8 @@ public class House implements HouseInterface {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeString(address);
-        dest.writeValue(context);
         dest.writeFloat(value);
-        dest.writeIntArray(picture);
+        dest.writeStringArray(picture);
         dest.writeString(description);
 
     }

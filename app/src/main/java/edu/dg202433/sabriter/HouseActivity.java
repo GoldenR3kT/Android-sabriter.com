@@ -19,7 +19,7 @@ import java.util.List;
 
 import edu.dg202433.android_projet.R;
 
-public class HouseActivity extends AppCompatActivity{
+public class HouseActivity extends AppCompatActivity implements PostExecuteActivity<House>{
 
     private LinearLayout linearLayout;
     private final int[] images = {R.drawable.tente_test1, R.drawable.tente_test2, R.drawable.tente_test3};
@@ -41,9 +41,9 @@ public class HouseActivity extends AppCompatActivity{
             startActivity(intent);
         });
 
-        String url = "https://github.com/GoldenR3kT/abri_data/blob/main/data.json";
+        String url = "https://raw.githubusercontent.com/GoldenR3kT/abri_data/main/data.json";
         //todo: try to change context from MainActivity.this in getApplicationContext()
-      //  new HttpAsyncGet<>(url, House.class, this, new ProgressDialog(this) );
+        new HttpAsyncGet<>(url, Abris.class, this, new ProgressDialog(this));
 
 
         linearLayout = findViewById(R.id.linear_layout1);
@@ -99,14 +99,13 @@ public class HouseActivity extends AppCompatActivity{
     }
 
 
-    /*
     @Override
-    public void onPostExecute(List<Character> itemList) {
-        itemList.forEach( shelter -> {
+    public void onPostExecute(List<House> itemList) {
+        itemList.forEach( house -> {
             TextView textView = new TextView(this);
-            textView.setText(shelter.toString());
+            textView.setText(house.toString());
             linearLayout.addView(textView);
         });
     }
-    */
+
 }
