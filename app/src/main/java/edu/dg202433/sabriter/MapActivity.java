@@ -1,6 +1,7 @@
 package edu.dg202433.sabriter;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,7 +23,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.preference.PreferenceManager;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.material.animation.DrawableAlphaProperty;
 
 import org.osmdroid.api.IMapController;
@@ -35,14 +35,19 @@ import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.OverlayItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.dg202433.android_projet.R;
 
-public class MapActivity extends AppCompatActivity implements LocationListener {
+public class MapActivity extends AppCompatActivity implements LocationListener, PostExecuteActivity<House> {
 
     private MapView map;
     private LocationManager locationManager;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
+
+    private static final List<House> HOUSE_LIST = new ArrayList<>(); //the complete list
+
+    ArrayList<OverlayItem> items = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,10 @@ public class MapActivity extends AppCompatActivity implements LocationListener {
         Configuration.getInstance().load(getApplicationContext() ,
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
         setContentView(R.layout.map_activity);
+
+        String url = "https://raw.githubusercontent.com/GoldenR3kT/abri_data/main/data.json";
+        //todo: try to change context from MainActivity.this in getApplicationContext()
+        new HttpAsyncGet<>(url, House.class, this, new ProgressDialog(this));
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -70,64 +79,14 @@ public class MapActivity extends AppCompatActivity implements LocationListener {
         mapController.setZoom(9.5);
         mapController.setCenter(startPoint); */
 
-        ArrayList<OverlayItem> items = new ArrayList<>();
-        OverlayItem home = new OverlayItem("La Casa", "Villa", new GeoPoint(48.8583, 2.2944));
-        items.add(home);
-        items.add(new OverlayItem("Eiffel Tower", "Tour Eiffel", new GeoPoint(47.8583, 2.3944)));
 
-
-        ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<OverlayItem>(getApplicationContext(),
-                items, new ItemizedOverlayWithFocus.OnItemGestureListener<OverlayItem>() {
-                    @Override
-                    public boolean onItemSingleTapUp(int index, OverlayItem item) {
-                        AlertDialog.Builder alertDialogBuilder;
-                        alertDialogBuilder = new AlertDialog.Builder(MapActivity.this);
-
-                        alertDialogBuilder.setTitle("titre");
-                        alertDialogBuilder.setIcon(R.drawable.home);
-
-                        ImageView imageView = new ImageView(MapActivity.this);
-                        imageView.setImageResource(R.drawable.tente_test1);
-
-
-                        imageView.setAdjustViewBounds(true);
-                        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                        imageView.setMaxWidth(700);
-                        imageView.setMaxHeight(550);
-
-                        alertDialogBuilder.setView(imageView);
-
-                        alertDialogBuilder
-                                .setMessage("message")
-                                .setCancelable(true)
-                                .setNeutralButton("Voir l'offre", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        Intent intent = new Intent(MapActivity.this, HouseActivity.class);
-                                        startActivity(intent);
-                                    }
-                                });
-
-
-                        AlertDialog alertDialog = alertDialogBuilder.create();
-                        alertDialog.show();
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onItemLongPress(int index, OverlayItem item) {
-                        return false;
-                    }
-        });
-
-        mOverlay.setFocusItemsOnTap(true);
-        map.getOverlays().add(mOverlay);
 
         TextView title = findViewById(R.id.title);
         title.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         });
+
     }
 
     @Override
@@ -173,4 +132,61 @@ public class MapActivity extends AppCompatActivity implements LocationListener {
         }
     }
 
+    @Override
+    public void onPostExecute(List<House> itemList) {
+        System.out.println("ICIIIIIIIIIIIIIIIIIIIIIII");
+        System.out.println("itemList = " + itemList);
+        HOUSE_LIST.addAll(itemList);
+
+        for (House house : HOUSE_LIST) {
+            items.add(new OverlayItem(house.getNom(), "", new GeoPoint(house.getLatitude(), house.getLongitude())));
+        }
+
+        ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<OverlayItem>(getApplicationContext(),
+                items, new ItemizedOverlayWithFocus.OnItemGestureListener<OverlayItem>() {
+            @Override
+            public boolean onItemSingleTapUp(int index, OverlayItem item) {
+                AlertDialog.Builder alertDialogBuilder;
+                alertDialogBuilder = new AlertDialog.Builder(MapActivity.this);
+
+                alertDialogBuilder.setTitle(item.getTitle());
+                alertDialogBuilder.setIcon(R.drawable.home);
+
+                ImageView imageView = new ImageView(MapActivity.this);
+                imageView.setImageResource(R.drawable.tente_test1);
+
+
+                imageView.setAdjustViewBounds(true);
+                imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                imageView.setMaxWidth(700);
+                imageView.setMaxHeight(550);
+
+                alertDialogBuilder.setView(imageView);
+
+                alertDialogBuilder
+                        .setMessage("message")
+                        .setCancelable(true)
+                        .setNeutralButton("Voir l'offre", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent(MapActivity.this, HouseActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+                return false;
+            }
+
+            @Override
+            public boolean onItemLongPress(int index, OverlayItem item) {
+                return false;
+            }
+        });
+
+        mOverlay.setFocusItemsOnTap(true);
+        map.getOverlays().add(mOverlay);
+    }
 }

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.dg202433.android_projet.R;
@@ -26,6 +27,8 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
     private int currentImageIndex = 0;
     private ObjectAnimator slideOutAnimation;
     private ObjectAnimator slideInAnimation;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,12 +112,6 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
 
     @Override
     public void onPostExecute(List<House> itemList) {
-        itemList.forEach( house -> {
-            TextView textView = new TextView(this);
-            textView.setText(house.toString());
-            linearLayout.addView(textView);
-        });
+
     }
-
-
 }

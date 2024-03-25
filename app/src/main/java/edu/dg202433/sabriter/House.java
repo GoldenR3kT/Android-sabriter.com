@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class House implements HouseInterface {
     private int id;
     private String nom;
-
     private int prix;
     private float value;
     private String adresse;
@@ -20,6 +19,8 @@ public class House implements HouseInterface {
     private String[] images;
 
     private String description;
+    private float latitude;
+    private float longitude;
 
     public House() {
         super();
@@ -82,6 +83,14 @@ public class House implements HouseInterface {
         return nombre_de_pièces;
     }
 
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
     public void setName(String name) {
         this.nom = nom;
     }
@@ -99,7 +108,6 @@ public class House implements HouseInterface {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
 
     @Override
