@@ -20,6 +20,8 @@ public interface HouseInterface extends Parcelable {
 
     float getSuperficie();
 
+    int getFirstImage();
+
 
     void setName(String name);
     void setAddress(String address);

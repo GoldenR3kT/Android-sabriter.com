@@ -1,10 +1,8 @@
 package edu.dg202433.sabriter;
 
-import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class House implements HouseInterface {
@@ -30,6 +28,9 @@ public class House implements HouseInterface {
     public House(Parcel in) {
         this.nom = in.readString();
         this.adresse = in.readString();
+        this.nombre_de_pièces = in.readInt();
+        this.nombre_de_chambres = in.readInt();
+        this.superficie = in.readFloat();
         this.value = in.readFloat();
         this.images = in.createStringArray();
         this.description = in.readString();
@@ -66,6 +67,9 @@ public class House implements HouseInterface {
         return images;
     }
 
+    public int  getFirstImage() {
+        return 0;
+    }
     public String getDescription() {
         return description;
     }
@@ -115,6 +119,9 @@ public class House implements HouseInterface {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(nom);
         dest.writeString(adresse);
+        dest.writeInt(nombre_de_pièces);
+        dest.writeInt(nombre_de_chambres);
+        dest.writeFloat(superficie);
         dest.writeFloat(value);
         dest.writeStringArray(images);
         dest.writeString(description);

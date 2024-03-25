@@ -38,6 +38,7 @@ public class HttpAsyncGet<T>{
             activity.runOnUiThread( ()-> {
                 if(progressDialog != null) progressDialog.dismiss();
                 activity.onPostExecute(getItemResult());
+
             } );
         };
         Executors.newSingleThreadExecutor().execute( runnable );
