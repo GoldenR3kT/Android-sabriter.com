@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,18 +26,12 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
     private LinearLayout linearLayout;
     private final int[] images = {R.drawable.tente_test1, R.drawable.tente_test2, R.drawable.tente_test3};
     private int currentImageIndex = 0;
-    private ObjectAnimator slideOutAnimation;
-    private ObjectAnimator slideInAnimation;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.house_activity);
 
-        slideOutAnimation = (ObjectAnimator) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.slide_out);
-        slideInAnimation = (ObjectAnimator) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.slide_in);
 
         TextView title = findViewById(R.id.title);
         Button gps = findViewById(R.id.mapButton);
@@ -65,20 +60,14 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
         slideLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                slideOutAnimation.setFloatValues(0, 1000);
-                slideInAnimation.setFloatValues(-1000, 0);
                 showPreviousImage();
-                applySlideAnimations();
             }
         });
 
         slideRightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                slideOutAnimation.setFloatValues(0, -1000);
-                slideInAnimation.setFloatValues(1000, 0);
                 showNextImage();
-                applySlideAnimations();
             }
         });
 
@@ -87,31 +76,20 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
 
     private void showNextImage() {
         currentImageIndex = (currentImageIndex + 1) % images.length;
+        linearLayout.setBackgroundResource(images[currentImageIndex]);
+
     }
 
     private void showPreviousImage() {
         currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+        linearLayout.setBackgroundResource(images[currentImageIndex]);
+
     }
-
-    private void applySlideAnimations() {
-        slideOutAnimation.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                linearLayout.setBackgroundResource(images[currentImageIndex]);
-                linearLayout.setTranslationX(0);
-                slideInAnimation.start();
-            }
-        });
-        slideInAnimation.setTarget(linearLayout);
-        slideOutAnimation.setTarget(linearLayout);
-
-        slideOutAnimation.start();
-    }
-
 
     @Override
     public void onPostExecute(List<House> itemList) {
+        itemList.forEach( house -> {
 
+        });
     }
 }
