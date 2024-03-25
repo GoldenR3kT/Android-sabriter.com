@@ -74,10 +74,17 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
 
+
         /* GeoPoint startPoint = new GeoPoint(48.8583, 2.2944);
         IMapController mapController = map.getController();
         mapController.setZoom(9.5);
         mapController.setCenter(startPoint); */
+
+
+        ArrayList<OverlayItem> items = new ArrayList<>();
+        OverlayItem home = new OverlayItem("La Casa", "Villa", new GeoPoint(37.7749,-122.4194));
+        items.add(home);
+        items.add(new OverlayItem("Eiffel Tower", "Tour Eiffel", new GeoPoint(47.8583, 2.3944)));
 
 
 
@@ -102,7 +109,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
     }
 
     @Override
-    public void onLocationChanged(@NonNull Location location) {
+    public void onLocationChanged(Location location) {
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
         GeoPoint startPoint = new GeoPoint(latitude, longitude);
@@ -116,7 +123,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -152,6 +159,8 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
                 alertDialogBuilder.setTitle(item.getTitle());
                 alertDialogBuilder.setIcon(R.drawable.home);
 
+                House selectedHouse = HOUSE_LIST.get(index);
+
                 ImageView imageView = new ImageView(MapActivity.this);
                 imageView.setImageResource(R.drawable.tente_test1);
 
@@ -164,7 +173,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
                 alertDialogBuilder.setView(imageView);
 
                 alertDialogBuilder
-                        .setMessage("message")
+                        .setMessage(selectedHouse.getDescription())
                         .setCancelable(true)
                         .setNeutralButton("Voir l'offre", new DialogInterface.OnClickListener() {
                             @Override
