@@ -159,6 +159,8 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
                 alertDialogBuilder.setTitle(item.getTitle());
                 alertDialogBuilder.setIcon(R.drawable.home);
 
+                House selectedHouse = HOUSE_LIST.get(index);
+
                 ImageView imageView = new ImageView(MapActivity.this);
                 imageView.setImageResource(R.drawable.tente_test1);
 
@@ -171,7 +173,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
                 alertDialogBuilder.setView(imageView);
 
                 alertDialogBuilder
-                        .setMessage("message")
+                        .setMessage(selectedHouse.getDescription())
                         .setCancelable(true)
                         .setNeutralButton("Voir l'offre", new DialogInterface.OnClickListener() {
                             @Override
