@@ -9,22 +9,28 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class House implements HouseInterface {
     private int id;
-    private String name;
+    private String nom;
+
+    private int prix;
     private float value;
-    private String address;
-    private int nbRooms;
-    private int nbBedrooms;
-    private float surface;
-    private String[] picture;
+    private String adresse;
+    private int nombre_de_pièces;
+    private int nombre_de_chambres;
+    private float superficie;
+    private String[] images;
 
     private String description;
 
-    @JsonCreator
+    public House() {
+        super();
+    }
+
+    @JsonIgnore
     public House(Parcel in) {
-        this.name = in.readString();
-        this.address = in.readString();
+        this.nom = in.readString();
+        this.adresse = in.readString();
         this.value = in.readFloat();
-        this.picture = in.createStringArray();
+        this.images = in.createStringArray();
         this.description = in.readString();
     }
 
@@ -33,33 +39,55 @@ public class House implements HouseInterface {
         return 0;
     }
 
-    public String getName() {
-        return name;
+
+    public int getId() {
+        return id;
     }
 
-    public String getAddress() {
-        return address;
+
+    public String getNom() {
+        return nom;
     }
 
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public int getPrix() {
+        return prix;
+    }
 
     public float getValue() {
         return value;
     }
 
-    public String[] getPicture() {
-        return picture;
+    public String[] getImages() {
+        return images;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setName(String name) {
-        this.name = name;
+
+    public int getNombre_de_chambres() {
+        return nombre_de_chambres;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public float getSuperficie() {
+        return superficie;
+    }
+
+    public int getNombre_de_pièces() {
+        return nombre_de_pièces;
+    }
+
+    public void setName(String name) {
+        this.nom = nom;
+    }
+
+    public void setAddress(String adresse) {
+        this.adresse = adresse;
     }
 
 
@@ -67,25 +95,20 @@ public class House implements HouseInterface {
         this.value = value;
     }
 
-    public void setPicture(String[] picture) {
-        this.picture = picture;
-    }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public String toString() {
-        return "Shelter{name=" + name + ", address=" + address  + ", value=" + value + ", picture=" + picture + ", description=" + description + "}";
-    }
+
 
     @Override
 
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(address);
+        dest.writeString(nom);
+        dest.writeString(adresse);
         dest.writeFloat(value);
-        dest.writeStringArray(picture);
+        dest.writeStringArray(images);
         dest.writeString(description);
 
     }

@@ -4,14 +4,25 @@ import android.content.Context;
 import android.os.Parcelable;
 
 public interface HouseInterface extends Parcelable {
-    String getName();
-    String getAddress();
+
+    int getId();
+    String getNom();
+
+    String getAdresse();
+    int getPrix();
     float getValue();
-    String[] getPicture();
+    String[] getImages();
     String getDescription();
+
+    int getNombre_de_pièces();
+
+    int getNombre_de_chambres();
+
+    float getSuperficie();
+
+
     void setName(String name);
     void setAddress(String address);
     void setValue(float value);
-    void setPicture(String[] picture);
     void setDescription(String description);
 }

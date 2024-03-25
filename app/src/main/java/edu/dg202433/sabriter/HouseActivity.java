@@ -43,7 +43,7 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
 
         String url = "https://raw.githubusercontent.com/GoldenR3kT/abri_data/main/data.json";
         //todo: try to change context from MainActivity.this in getApplicationContext()
-        new HttpAsyncGet<>(url, Abris.class, this, new ProgressDialog(this));
+        new HttpAsyncGet<>(url, House.class, this, new ProgressDialog(this));
 
 
         linearLayout = findViewById(R.id.linear_layout1);
@@ -107,5 +107,6 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
             linearLayout.addView(textView);
         });
     }
+
 
 }
