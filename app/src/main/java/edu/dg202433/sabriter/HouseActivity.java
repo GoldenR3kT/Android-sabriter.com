@@ -36,8 +36,16 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
         slideInAnimation = (ObjectAnimator) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.slide_in);
 
         TextView title = findViewById(R.id.title);
+        Button gps = findViewById(R.id.mapButton);
+
         title.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        });
+
+
+        gps.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
         });
 

@@ -1,8 +1,14 @@
 package edu.dg202433.sabriter;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -10,10 +16,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.preference.PreferenceManager;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.material.animation.DrawableAlphaProperty;
 
 import org.osmdroid.api.IMapController;
@@ -29,28 +38,43 @@ import java.util.ArrayList;
 
 import edu.dg202433.android_projet.R;
 
-public class MapActivity extends AppCompatActivity {
+public class MapActivity extends AppCompatActivity implements LocationListener {
 
     private MapView map;
+    private LocationManager locationManager;
+    private static final int REQUEST_LOCATION_PERMISSION = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Configuration.getInstance().load(getApplicationContext() ,
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
         setContentView(R.layout.map_activity);
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+            // Demander des mises à jour de localisation
+        } else {
+            // Demander la permission
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
+        }
+
         map = findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
-        GeoPoint startPoint = new GeoPoint(48.8583, 2.2944);
+
+        /* GeoPoint startPoint = new GeoPoint(48.8583, 2.2944);
         IMapController mapController = map.getController();
         mapController.setZoom(9.5);
-        mapController.setCenter(startPoint);
+        mapController.setCenter(startPoint); */
 
         ArrayList<OverlayItem> items = new ArrayList<>();
         OverlayItem home = new OverlayItem("La Casa", "Villa", new GeoPoint(48.8583, 2.2944));
-        Drawable m = home.getMarker(0);
         items.add(home);
         items.add(new OverlayItem("Eiffel Tower", "Tour Eiffel", new GeoPoint(47.8583, 2.3944)));
+
 
         ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<OverlayItem>(getApplicationContext(),
                 items, new ItemizedOverlayWithFocus.OnItemGestureListener<OverlayItem>() {
@@ -117,4 +141,36 @@ public class MapActivity extends AppCompatActivity {
         super.onResume();
         map.onResume();
     }
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        double latitude = location.getLatitude();
+        double longitude = location.getLongitude();
+        GeoPoint startPoint = new GeoPoint(latitude, longitude);
+        setMapStartPoint(startPoint);
+        locationManager.removeUpdates(this);
+    }
+
+    private void setMapStartPoint(GeoPoint startPoint) {
+        map.getController().setZoom(9.5);
+        map.getController().setCenter(startPoint);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_LOCATION_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission accordée, démarrer les mises à jour de localisation
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+                }
+            } else {
+                // Permission refusée, définir la localisation par défaut
+                GeoPoint startPoint = new GeoPoint(48.8583, 2.2944);
+                setMapStartPoint(startPoint);
+            }
+        }
+    }
+
 }
