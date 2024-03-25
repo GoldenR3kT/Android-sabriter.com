@@ -11,7 +11,7 @@ public class House implements HouseInterface {
     private int prix;
     private float value;
     private String adresse;
-    private int nombre_de_pièces;
+    private int nombre_de_pieces;
     private int nombre_de_chambres;
     private float superficie;
     private String[] images;
@@ -26,14 +26,18 @@ public class House implements HouseInterface {
 
     @JsonIgnore
     public House(Parcel in) {
+        this.id = in.readInt();
         this.nom = in.readString();
+        this.prix = in.readInt();
         this.adresse = in.readString();
-        this.nombre_de_pièces = in.readInt();
+        this.nombre_de_pieces = in.readInt();
         this.nombre_de_chambres = in.readInt();
         this.superficie = in.readFloat();
         this.value = in.readFloat();
         this.images = in.createStringArray();
         this.description = in.readString();
+        this.latitude = in.readFloat();
+        this.longitude = in.readFloat();
     }
 
     @Override
@@ -83,8 +87,8 @@ public class House implements HouseInterface {
         return superficie;
     }
 
-    public int getNombre_de_pièces() {
-        return nombre_de_pièces;
+    public int getNombre_de_pieces() {
+        return nombre_de_pieces;
     }
 
     public float getLatitude() {
@@ -95,7 +99,7 @@ public class House implements HouseInterface {
         return longitude;
     }
 
-    public void setName(String name) {
+    public void setName(String nom) {
         this.nom = nom;
     }
 
@@ -119,7 +123,7 @@ public class House implements HouseInterface {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(nom);
         dest.writeString(adresse);
-        dest.writeInt(nombre_de_pièces);
+        dest.writeInt(nombre_de_pieces);
         dest.writeInt(nombre_de_chambres);
         dest.writeFloat(superficie);
         dest.writeFloat(value);

@@ -14,7 +14,7 @@ public interface HouseInterface extends Parcelable {
     String[] getImages();
     String getDescription();
 
-    int getNombre_de_pièces();
+    int getNombre_de_pieces();
 
     int getNombre_de_chambres();
 

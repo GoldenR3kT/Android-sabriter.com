@@ -45,8 +45,12 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
             HouseAdapter adapter2 = new HouseAdapter(HOUSE_LIST, this);
             listview2.setAdapter(adapter2);
 
+            Button buttonGPS2 = findViewById(R.id.mapButton);
 
-
+            buttonGPS2.setOnClickListener(v2 -> {
+                Intent intent = new Intent(this, MapActivity.class);
+                startActivity(intent);
+            });
 
         });
     }
