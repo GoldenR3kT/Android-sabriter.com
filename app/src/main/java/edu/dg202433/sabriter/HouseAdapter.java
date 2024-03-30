@@ -49,11 +49,4 @@ public class HouseAdapter extends BaseAdapter {
 
         return layoutItem;
     }
-
-
-
-
-
-
-
 }
