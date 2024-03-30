@@ -1,27 +1,23 @@
 package edu.dg202433.sabriter;
 
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.dg202433.android_projet.R;
+import edu.dg202433.sabriter.classes.House;
+import edu.dg202433.sabriter.request.HttpAsyncGet;
+import edu.dg202433.sabriter.request.PostExecuteActivity;
 
-public class HouseActivity extends AppCompatActivity implements PostExecuteActivity<House>{
+public class HouseActivity extends AppCompatActivity implements PostExecuteActivity<House> {
 
     private LinearLayout linearLayout;
     private final int[] images = {R.drawable.tente_test1, R.drawable.tente_test2, R.drawable.tente_test3};

@@ -1,4 +1,4 @@
-package edu.dg202433.sabriter;
+package edu.dg202433.sabriter.request;
 
 import java.util.List;
 

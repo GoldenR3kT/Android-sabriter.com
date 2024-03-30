@@ -13,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import java.util.List;
 
 import edu.dg202433.android_projet.R;
+import edu.dg202433.sabriter.classes.House;
 
 public class HouseAdapter extends BaseAdapter {
 

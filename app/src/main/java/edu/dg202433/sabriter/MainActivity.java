@@ -6,12 +6,21 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.firebase.Firebase;
+
 
 import java.util.List;
 
 import edu.dg202433.android_projet.R;
+import edu.dg202433.sabriter.authentification.LoginActivity;
+import edu.dg202433.sabriter.authentification.ProfileActivity;
+import edu.dg202433.sabriter.classes.House;
+import edu.dg202433.sabriter.request.HttpAsyncGet;
+import edu.dg202433.sabriter.request.PostExecuteActivity;
 
 public class MainActivity extends AppCompatActivity implements PostExecuteActivity<House> {
 
@@ -32,6 +41,13 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
             Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
         });
+
+        ImageButton profileButton = findViewById(R.id.profileButton);
+        profileButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ProfileActivity.class);
+            startActivity(intent);
+        });
+
 
         searchButton.setOnClickListener(v -> {
             setContentView(R.layout.activity_search);

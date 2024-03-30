@@ -1,4 +1,4 @@
-package edu.dg202433.sabriter;
+package edu.dg202433.sabriter.classes;
 
 import android.os.Parcel;
 import android.os.Parcelable;

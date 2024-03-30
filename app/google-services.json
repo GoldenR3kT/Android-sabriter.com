@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "549255024186",
+    "project_id": "sabriter-51e06",
+    "storage_bucket": "sabriter-51e06.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:549255024186:android:03e2aad8e467809c542f03",
+        "android_client_info": {
+          "package_name": "edu.dg202433.android_projet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtrCtu_XfWYO3sJbkbND6OyKmjGFaeUWk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
