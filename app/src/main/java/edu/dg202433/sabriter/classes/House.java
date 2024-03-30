@@ -19,6 +19,8 @@ public class House implements HouseInterface {
     private String description;
     private float latitude;
     private float longitude;
+    @JsonIgnore
+    private String[] completeImageLinks;
 
     public House() {
         super();
@@ -45,6 +47,21 @@ public class House implements HouseInterface {
         return 0;
     }
 
+    public void initializeCompleteImageLinks() {
+        if (images != null) {
+            completeImageLinks = new String[images.length];
+            for (int i = 0; i < images.length; i++) {
+                completeImageLinks[i] = "https://github.com/GoldenR3kT/abri_data/blob/main/images/" + images[i] +"?raw=true";
+            }
+        }
+    }
+
+    public String[] getCompleteImageLinks() {
+        if (completeImageLinks == null) {
+            initializeCompleteImageLinks();
+        }
+        return completeImageLinks;
+    }
 
     public int getId() {
         return id;
@@ -68,6 +85,11 @@ public class House implements HouseInterface {
     }
 
     public String[] getImages() {
+        if (images != null) {
+            for (int i = 0; i < images.length; i++) {
+                images[i] = "https://github.com/GoldenR3kT/abri_data/blob/main/images/" + images[i] +"?raw=true";
+            }
+        }
         return images;
     }
 

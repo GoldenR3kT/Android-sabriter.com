@@ -18,6 +18,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.preference.PreferenceManager;
 
+import com.google.android.material.animation.DrawableAlphaProperty;
+import com.squareup.picasso.Picasso;
+
+import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
@@ -135,8 +139,6 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
 
     @Override
     public void onPostExecute(List<House> itemList) {
-        System.out.println("ICIIIIIIIIIIIIIIIIIIIIIII");
-        System.out.println("itemList = " + itemList);
         HOUSE_LIST.addAll(itemList);
 
         for (House house : HOUSE_LIST) {
@@ -156,7 +158,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
                 House selectedHouse = HOUSE_LIST.get(index);
 
                 ImageView imageView = new ImageView(MapActivity.this);
-                imageView.setImageResource(R.drawable.tente_test1);
+                Picasso.get().load(selectedHouse.getCompleteImageLinks()[0]).into(imageView);
 
 
                 imageView.setAdjustViewBounds(true);
