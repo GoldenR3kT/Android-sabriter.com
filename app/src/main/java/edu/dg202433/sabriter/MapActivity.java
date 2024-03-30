@@ -10,6 +10,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.dg202433.android_projet.R;
+import edu.dg202433.sabriter.authentification.ProfileActivity;
 import edu.dg202433.sabriter.classes.House;
 import edu.dg202433.sabriter.request.HttpAsyncGet;
 import edu.dg202433.sabriter.request.PostExecuteActivity;
@@ -50,6 +52,9 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         Configuration.getInstance().load(getApplicationContext() ,
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
         setContentView(R.layout.map_activity);
@@ -91,6 +96,12 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         });
+        ImageButton profileButton = findViewById(R.id.profileButton);
+        profileButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ProfileActivity.class);
+            startActivity(intent);
+        });
+
 
     }
 

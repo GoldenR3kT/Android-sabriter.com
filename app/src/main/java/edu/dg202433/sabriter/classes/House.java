@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class House implements HouseInterface {
     private int id;
     private String nom;
+
+    private String type;
     private int prix;
     private float value;
     private String adresse;
@@ -30,6 +32,7 @@ public class House implements HouseInterface {
     public House(Parcel in) {
         this.id = in.readInt();
         this.nom = in.readString();
+        this.type = in.readString();
         this.prix = in.readInt();
         this.adresse = in.readString();
         this.nombre_de_pieces = in.readInt();
@@ -70,6 +73,10 @@ public class House implements HouseInterface {
 
     public String getNom() {
         return nom;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public String getAdresse() {
@@ -144,6 +151,7 @@ public class House implements HouseInterface {
 
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(nom);
+        dest.writeString(type);
         dest.writeString(adresse);
         dest.writeInt(nombre_de_pieces);
         dest.writeInt(nombre_de_chambres);

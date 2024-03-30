@@ -38,10 +38,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Inscription"
-        android:textSize="24sp"
+        android:textSize="26sp"
         android:textColor="@color/black"
+        android:fontFamily="sans-serif-medium"
+
         android:layout_gravity="center"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="35dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintTop_toBottomOf="@id/topbar"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,11 +57,10 @@
         android:text="@string/email"
         android:textSize="20sp"
         android:textColor="@color/black"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="85dp"
+        app:layout_constraintStart_toStartOf="@id/topbar"
         app:layout_constraintTop_toBottomOf="@id/titleLogement"
-        app:layout_constraintEnd_toEndOf="@id/titleLogement"
-
         />
 
     <EditText
@@ -72,7 +73,7 @@
         android:background="@drawable/edittextebackground"
         android:hint="@string/email"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/titleLocation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -93,6 +94,7 @@
         android:id="@+id/password"
         android:layout_width="250dp"
         android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:layout_gravity="center"
         android:autofillHints="mot de passe"
         android:inputType="textPassword"

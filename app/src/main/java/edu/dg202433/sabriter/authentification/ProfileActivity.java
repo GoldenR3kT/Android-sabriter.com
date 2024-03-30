@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,13 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
         email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         password.setText("*******");
 
-        Button buttonGPS = findViewById(R.id.mapButton);
 
-
-        buttonGPS.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MapActivity.class);
-            startActivity(intent);
-        });
 
         TextView title = findViewById(R.id.title);
         title.setOnClickListener(v -> {

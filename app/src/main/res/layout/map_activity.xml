@@ -18,21 +18,25 @@
             android:layout_height="wrap_content"
             android:text="@string/myapp"
             android:textColor="@color/white"
+            android:layout_weight="1"
+
             android:textSize="24sp"
             android:fontFamily="sans-serif-medium"
             android:layout_gravity="center"
             android:layout_marginStart="16dp"/>
 
-        <Button
-            android:id="@+id/mapButton"
+
+        <ImageButton
+            android:id="@+id/profileButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="GPS"
-            android:textSize="20sp"
-            android:textColor="@color/white"
+            android:layout_marginEnd="10dp"
+            android:background="@color/blue"
+            android:src="@drawable/profile"
+            android:layout_marginStart="10dp"
             android:layout_gravity="center"
-            android:backgroundTint="@color/blue2"
-            android:layout_marginStart="170dp"/>
+
+            />
 
     </LinearLayout>
 

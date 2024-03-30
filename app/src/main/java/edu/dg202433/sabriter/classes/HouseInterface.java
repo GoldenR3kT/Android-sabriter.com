@@ -8,6 +8,7 @@ public interface HouseInterface extends Parcelable {
     int getId();
     String getNom();
 
+    String getType();
     String getAdresse();
     int getPrix();
     float getValue();
