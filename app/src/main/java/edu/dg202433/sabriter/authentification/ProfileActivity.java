@@ -3,6 +3,7 @@ package edu.dg202433.sabriter.authentification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,11 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+
+        EditText email = findViewById(R.id.email);
+        EditText password = findViewById(R.id.password);
+        email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        password.setText("*******");
 
         Button buttonGPS = findViewById(R.id.mapButton);
 

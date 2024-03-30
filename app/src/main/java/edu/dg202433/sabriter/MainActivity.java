@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 import java.util.List;
@@ -24,11 +25,20 @@ import edu.dg202433.sabriter.request.PostExecuteActivity;
 
 public class MainActivity extends AppCompatActivity implements PostExecuteActivity<House> {
 
+    private FirebaseAuth mAuth;
     private static List<House> HOUSE_LIST;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        mAuth = FirebaseAuth.getInstance();
+
+        if (mAuth.getCurrentUser() == null) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            setContentView(R.layout.activity_main);
+        }
         String url = "https://raw.githubusercontent.com/GoldenR3kT/abri_data/main/data.json";
         new HttpAsyncGet<>(url, House.class, this, new ProgressDialog(this));
 
@@ -71,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
         });
     }
 
-
     @Override
     public void onPostExecute(List<House> itemList) {
         for (House house : itemList) {
@@ -84,4 +93,6 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
         listview.setAdapter(adapter);
 
     }
+
+
 }
