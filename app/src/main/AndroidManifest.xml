@@ -39,6 +39,9 @@
         <activity
             android:name="edu.dg202433.sabriter.authentification.ProfileActivity"
             android:exported="true" />
+        <activity
+            android:name="edu.dg202433.sabriter.authentification.RegisterActivity"
+            android:exported="true" />
 
 
 
