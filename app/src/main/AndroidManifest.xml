@@ -20,13 +20,16 @@
         tools:targetApi="29">
 
         <activity
-            android:name="edu.dg202433.sabriter.authentification.LoginActivity"
+            android:name="edu.dg202433.sabriter.StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="edu.dg202433.sabriter.authentification.LoginActivity"
+            android:exported="true" />
         <activity
             android:name="edu.dg202433.sabriter.HouseActivity"
             android:exported="true" />
