@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
                 resetFilter();
             }
         });
+
         EditText budget = findViewById(R.id.locationBudgetEditText);
         budget.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
@@ -121,6 +122,8 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
             ListView listview2 = findViewById(R.id.listView);
             HouseAdapter adapter2 = new HouseAdapter(HOUSE_LIST_FILTERED, this);
             listview2.setAdapter(adapter2);
+
+
 
             ImageButton buttonGPS2 = findViewById(R.id.mapButton);
 
@@ -163,6 +166,8 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
             });
 
 
+
+
         });
     }
 
@@ -170,9 +175,6 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
 
     @Override
     public void onPostExecute(List<House> itemList) {
-        for (House house : itemList) {
-            System.out.println(house.getNom());
-        }
         HOUSE_LIST = itemList;
         HOUSE_LIST_FILTERED = itemList;
         ListView listview = findViewById(R.id.listView);

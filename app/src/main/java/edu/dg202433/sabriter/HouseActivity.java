@@ -76,6 +76,26 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
         });
 
         linearLayout.setBackgroundResource(images[currentImageIndex]);
+
+        Button buyButton = findViewById(R.id.buy_button);
+
+        boolean isItemPurchased = getIntent().getBooleanExtra("isItemPurchased", false);
+
+        if (isItemPurchased) {
+            buyButton.setText("ACHETÉ");
+            buyButton.setEnabled(false);
+        } else {
+            buyButton.setText("ACHETER");
+            buyButton.setOnClickListener(v -> {
+                buyButton.setText("ACHETÉ");
+                buyButton.setEnabled(false);
+            });
+        }
+        buyButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, PayementActivity.class);
+            startActivity(intent);
+        });
+
     }
 
     private void showNextImage() {

@@ -11,7 +11,6 @@ public interface HouseInterface extends Parcelable {
     String getType();
     String getAdresse();
     int getPrix();
-    float getValue();
     String[] getImages();
     String getDescription();
 
@@ -21,11 +20,10 @@ public interface HouseInterface extends Parcelable {
 
     float getSuperficie();
 
-    int getFirstImage();
-
+    float getNote();
 
     void setName(String name);
     void setAddress(String address);
-    void setValue(float value);
+    void setNote(float value);
     void setDescription(String description);
 }

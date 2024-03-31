@@ -5,45 +5,64 @@ import android.os.Parcelable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.ArrayList;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+
+
 public class House implements HouseInterface {
-    private int id;
+    private final int id;
     private String nom;
 
-    private String type;
-    private int prix;
-    private float value;
+    private final String type;
+    private final int prix;
+    private float note;
+    private List<Float> listNotes;
+
     private String adresse;
-    private int nombre_de_pieces;
-    private int nombre_de_chambres;
-    private float superficie;
-    private String[] images;
+    private final int nombre_de_pieces;
+    private final int nombre_de_chambres;
+    private final float superficie;
+    private final String[] images;
 
     private String description;
-    private float latitude;
-    private float longitude;
+    private final float latitude;
+    private final float longitude;
     @JsonIgnore
     private String[] completeImageLinks;
 
-    public House() {
-        super();
+
+    @JsonCreator
+    public House(@JsonProperty("id") int id,
+                 @JsonProperty("nom") String nom,
+                 @JsonProperty("type") String type,
+                 @JsonProperty("prix") int prix,
+                 @JsonProperty("note") float note,
+                 @JsonProperty("adresse") String adresse,
+                 @JsonProperty("nombre_de_pieces") int nombre_de_pieces,
+                 @JsonProperty("nombre_de_chambres") int nombre_de_chambres,
+                 @JsonProperty("superficie") float superficie,
+                 @JsonProperty("images") String[] images,
+                 @JsonProperty("description") String description,
+                 @JsonProperty("latitude") float latitude,
+                 @JsonProperty("longitude") float longitude) {
+        this.id = id;
+        this.nom = nom;
+        this.type = type;
+        this.prix = prix;
+        this.note = note;
+        this.adresse = adresse;
+        this.nombre_de_pieces = nombre_de_pieces;
+        this.nombre_de_chambres = nombre_de_chambres;
+        this.superficie = superficie;
+        this.images = images;
+        this.description = description;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        listNotes = new ArrayList<>();
     }
 
-    @JsonIgnore
-    public House(Parcel in) {
-        this.id = in.readInt();
-        this.nom = in.readString();
-        this.type = in.readString();
-        this.prix = in.readInt();
-        this.adresse = in.readString();
-        this.nombre_de_pieces = in.readInt();
-        this.nombre_de_chambres = in.readInt();
-        this.superficie = in.readFloat();
-        this.value = in.readFloat();
-        this.images = in.createStringArray();
-        this.description = in.readString();
-        this.latitude = in.readFloat();
-        this.longitude = in.readFloat();
-    }
 
     @Override
     public int describeContents() {
@@ -87,8 +106,8 @@ public class House implements HouseInterface {
         return prix;
     }
 
-    public float getValue() {
-        return value;
+    public float getNote() {
+        return note;
     }
 
     public String[] getImages() {
@@ -100,9 +119,6 @@ public class House implements HouseInterface {
         return images;
     }
 
-    public int  getFirstImage() {
-        return 0;
-    }
     public String getDescription() {
         return description;
     }
@@ -137,13 +153,28 @@ public class House implements HouseInterface {
     }
 
 
-    public void setValue(float value) {
-        this.value = value;
+    public void setNote(float value) {
+        this.note = value;
     }
 
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void addNote(float note) {
+        listNotes.add(note);
+    }
+
+    public float getMoyenneNote() {
+        if (listNotes.isEmpty()) {
+            return 0.0f;
+        }
+        float sum = 0.0f;
+        for (Float rating : listNotes) {
+            sum += rating;
+        }
+        return sum / listNotes.size();
     }
 
 
@@ -156,7 +187,7 @@ public class House implements HouseInterface {
         dest.writeInt(nombre_de_pieces);
         dest.writeInt(nombre_de_chambres);
         dest.writeFloat(superficie);
-        dest.writeFloat(value);
+        dest.writeFloat(note);
         dest.writeStringArray(images);
         dest.writeString(description);
 
@@ -165,7 +196,20 @@ public class House implements HouseInterface {
     public static final Parcelable.Creator<House> CREATOR = new Parcelable.Creator<House>() {
         @Override
         public House createFromParcel(Parcel in) {
-            return new House(in);
+            int id = in.readInt();
+            String nom = in.readString();
+            String type = in.readString();
+            int prix = in.readInt();
+            float note = in.readFloat();
+            String adresse = in.readString();
+            int nombre_de_pieces = in.readInt();
+            int nombre_de_chambres = in.readInt();
+            float superficie = in.readFloat();
+            String[] images = in.createStringArray();
+            String description = in.readString();
+            float latitude = in.readFloat();
+            float longitude = in.readFloat();
+            return new House(id, nom, type, prix, note, adresse, nombre_de_pieces, nombre_de_chambres, superficie, images, description, latitude, longitude);
         }
         @Override
         public House[] newArray(int size) {
@@ -173,8 +217,6 @@ public class House implements HouseInterface {
         }
     };
 
-    public static Parcelable.Creator<House> getCreator() {
-        return CREATOR;
-    }
+
 
 }

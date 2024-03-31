@@ -147,9 +147,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
+        android:textSize="20sp"
         android:layout_marginHorizontal="8dp"
         android:backgroundTint="#0CA4D3"
-        android:text="Contacter le vendeur"
+        android:text="ACHETER"
         android:layout_marginTop="15dp"/>
 
 
