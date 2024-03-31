@@ -33,7 +33,7 @@ public class StartActivity extends AppCompatActivity {
             }
             @Override
             public void onAnimationEnd(Animator animation) {
-                Intent intent = new Intent(StartActivity.this, MainActivity.class);
+                Intent intent = new Intent(StartActivity.this, edu.dg202433.sabriter.authentification.LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
