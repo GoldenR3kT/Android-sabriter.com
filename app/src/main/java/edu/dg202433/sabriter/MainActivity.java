@@ -5,26 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
 
-import com.google.firebase.Firebase;
+
 import com.google.firebase.auth.FirebaseAuth;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import edu.dg202433.android_projet.R;
 import edu.dg202433.sabriter.authentification.LoginActivity;
@@ -40,7 +31,8 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
 
     private static List<House> HOUSE_LIST_FILTERED;
 
-    private static List<House> modifiedHouses = new ArrayList<>();
+    private SearchActivity searchActivity;
+
 
 
     CheckBox checkBox;
@@ -131,7 +123,6 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
         HOUSE_LIST = itemList;
         HOUSE_LIST_FILTERED = itemList;
 
-
     }
 
     private void filterList() {
@@ -157,20 +148,6 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
     private void resetFilter() {
         HOUSE_LIST_FILTERED.clear();
         HOUSE_LIST_FILTERED.addAll(HOUSE_LIST);
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (HOUSE_LIST_FILTERED != null) {
-            for (House modifiedHouse : modifiedHouses) {
-                int index = HOUSE_LIST_FILTERED.indexOf(modifiedHouse);
-                if (index != -1) {
-                    HOUSE_LIST_FILTERED.set(index, modifiedHouse);
-                }
-            }
-        }
     }
 
 

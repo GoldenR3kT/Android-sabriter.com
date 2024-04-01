@@ -1,5 +1,6 @@
 package edu.dg202433.sabriter;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -24,10 +25,14 @@ public class HouseAdapter extends BaseAdapter {
 
     private Context mContext;
 
-    public HouseAdapter(List<House> houses, Context context) {
+    private List<House> modifiedHouses;
+
+    public HouseAdapter(List<House> houses, Context context, List<House> modifiedHouses) {
         this.houses = houses;
         mInflater = LayoutInflater.from(context);
         mContext = context;
+        this.modifiedHouses = modifiedHouses;
+
     }
 
     public int getCount() {
@@ -58,9 +63,13 @@ public class HouseAdapter extends BaseAdapter {
 
         value.setText(String.valueOf(house.getMoyenneNote()));
 
-        ratingBar.setOnRatingBarChangeListener((ratingBar2, rating, fromUser) -> {
-            house.setNoteFromRatingBarChange(rating);
-            value.setText(String.valueOf(house.getMoyenneNote()));
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                house.setNoteFromRatingBarChange(rating);
+                modifiedHouses.add(house);
+                notifyDataSetChanged();
+            }
         });
 
 

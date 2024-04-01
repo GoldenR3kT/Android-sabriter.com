@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -25,6 +27,9 @@ import edu.dg202433.sabriter.classes.House;
 public class SearchActivity extends AppCompatActivity {
 
     private static List<House> HOUSE_LIST_FILTERED;
+    private static List<House> modifiedHouses = new ArrayList<>();
+
+    private HouseAdapter adapter;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +47,8 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         ListView listview2 = findViewById(R.id.listView);
-        HouseAdapter adapter2 = new HouseAdapter(HOUSE_LIST_FILTERED, this);
-        listview2.setAdapter(adapter2);
+        adapter = new HouseAdapter(HOUSE_LIST_FILTERED, this, modifiedHouses);
+        listview2.setAdapter(adapter);
 
 
 
@@ -61,9 +66,9 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         Spinner spinner = findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tri, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.tri, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter2);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -87,5 +92,24 @@ public class SearchActivity extends AppCompatActivity {
 
         });
 
+
     }
+
+    private void updateMainList() {
+        for (House modifiedHouse : modifiedHouses) {
+            int index = HOUSE_LIST_FILTERED.indexOf(modifiedHouse);
+            if (index != -1) {
+                HOUSE_LIST_FILTERED.set(index, modifiedHouse);
+            }
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateMainList();
+    }
+
 }
