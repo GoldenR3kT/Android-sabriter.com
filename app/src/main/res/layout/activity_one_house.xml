@@ -48,6 +48,8 @@
                 android:scaleX="0.5"
                 android:scaleY="0.5"
                 android:numStars="5"
+                android:progressTint="@color/yellow"
+                android:backgroundTint="@color/black"
                 android:layout_marginStart="5dp"/>
 
             <TextView

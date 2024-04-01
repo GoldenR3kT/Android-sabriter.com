@@ -1,7 +1,9 @@
 package edu.dg202433.sabriter;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,6 +70,23 @@ public class HouseAdapter extends BaseAdapter {
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 house.setNoteFromRatingBarChange(rating);
                 modifiedHouses.add(house);
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setMessage("Merci pour votre note :)");
+
+                // Définir le titre du dialogue
+                builder.setTitle("Note attribuée");
+
+                // Ajouter un bouton personnalisé avec un style
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                        notifyDataSetChanged();                    }
+                });
+
+                AlertDialog alertDialog = builder.create();
+
+
+                alertDialog.show();
                 notifyDataSetChanged();
             }
         });
