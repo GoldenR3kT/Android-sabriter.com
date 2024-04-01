@@ -161,6 +161,8 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
 
                 alertDialogBuilder.setView(imageView);
 
+
+
                 alertDialogBuilder
                         .setMessage(selectedHouse.getDescription())
                         .setCancelable(true)
@@ -168,6 +170,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent intent = new Intent(MapActivity.this, HouseActivity.class);
+                                intent.putExtra("selectedHouse", selectedHouse);
                                 startActivity(intent);
                             }
                         });

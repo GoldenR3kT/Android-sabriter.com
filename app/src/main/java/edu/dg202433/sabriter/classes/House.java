@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 
-public class House implements HouseInterface {
+public class House implements HouseInterface, Parcelable{
     private final int id;
     private String nom;
 
@@ -181,19 +181,22 @@ public class House implements HouseInterface {
     @Override
 
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeString(nom);
         dest.writeString(type);
+        dest.writeInt(prix);
+        dest.writeFloat(note);
         dest.writeString(adresse);
         dest.writeInt(nombre_de_pieces);
         dest.writeInt(nombre_de_chambres);
         dest.writeFloat(superficie);
-        dest.writeFloat(note);
         dest.writeStringArray(images);
         dest.writeString(description);
-
+        dest.writeFloat(latitude);
+        dest.writeFloat(longitude);
     }
 
-    public static final Parcelable.Creator<House> CREATOR = new Parcelable.Creator<House>() {
+    public static final Creator<House> CREATOR = new Creator<House>() {
         @Override
         public House createFromParcel(Parcel in) {
             int id = in.readInt();
