@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 
-public class House implements HouseInterface {
+public class House implements HouseInterface, Parcelable{
     private final int id;
     private String nom;
 

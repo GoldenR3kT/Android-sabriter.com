@@ -49,41 +49,47 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        android:background="@drawable/tente_test1"
-        android:id="@+id/linear_layout1">
+        android:id="@+id/frame_layout">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/item_image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/tente_test1" /> <!-- Image par défaut -->
 
         <Button
             android:id="@+id/slide_left"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_marginLeft="5dp"
+            android:layout_gravity="start|top"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="100dp"
             android:backgroundTint="#0CA4D3"
             android:text=""
             android:alpha="0.8"
-            android:background="@drawable/fleche_gauche"
-            />
+            android:background="@drawable/fleche_gauche" />
 
         <Button
             android:id="@+id/slide_right"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_marginLeft="290dp"
+            android:layout_gravity="end|top"
+            android:layout_marginEnd="5dp"
             android:layout_marginTop="100dp"
             android:backgroundTint="#0CA4D3"
             android:text=""
             android:alpha="0.8"
-            android:background="@drawable/fleche_droite"
-            />
+            android:background="@drawable/fleche_droite" />
 
-    </LinearLayout>
+    </FrameLayout>
 
 
     <TextView
-        android:id="@+id/item_text"
+        android:id="@+id/item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="25sp"

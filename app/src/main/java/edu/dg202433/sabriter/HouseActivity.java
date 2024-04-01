@@ -6,10 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.List;
 
@@ -21,9 +25,9 @@ import edu.dg202433.sabriter.request.PostExecuteActivity;
 
 public class HouseActivity extends AppCompatActivity implements PostExecuteActivity<House> {
 
-    private LinearLayout linearLayout;
-    private final int[] images = {R.drawable.tente_test1, R.drawable.tente_test2, R.drawable.tente_test3};
+
     private int currentImageIndex = 0;
+    private  House house;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +44,6 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
             startActivity(intent);
         });
 
-
         gps.setOnClickListener(v -> {
             Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
@@ -55,8 +58,23 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
         //todo: try to change context from MainActivity.this in getApplicationContext()
         new HttpAsyncGet<>(url, House.class, this, new ProgressDialog(this));
 
+        house = getIntent().getParcelableExtra("selectedHouse");
+        assert house != null;
 
-        linearLayout = findViewById(R.id.linear_layout1);
+
+
+        TextView house_title = findViewById(R.id.item_title);
+        TextView house_description = findViewById(R.id.item_desc);
+        TextView house_price = findViewById(R.id.item_price);
+        TextView house_chambers = findViewById(R.id.item_chambers);
+        TextView house_pieces = findViewById(R.id.item_pieces);
+
+        house_title.setText(house.getNom());
+        house_description.setText(house.getDescription());
+        house_price.setText(house.getPrix() + "€");
+        house_chambers.setText(house.getNombre_de_chambres() + " chambres");
+        house_pieces.setText(house.getNombre_de_pieces() + " pièces");
+
 
         Button slideLeftButton = findViewById(R.id.slide_left);
         Button slideRightButton = findViewById(R.id.slide_right);
@@ -75,7 +93,10 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
             }
         });
 
-        linearLayout.setBackgroundResource(images[currentImageIndex]);
+
+        String imageUrl = house.getCompleteImageLinks()[currentImageIndex];
+        ImageView imageView = findViewById(R.id.item_image); // Remplacez R.id.imageView par l'ID réel de votre ImageView
+        Picasso.get().load(imageUrl).into(imageView);
 
         Button buyButton = findViewById(R.id.buy_button);
 
@@ -99,14 +120,19 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
     }
 
     private void showNextImage() {
-        currentImageIndex = (currentImageIndex + 1) % images.length;
-        linearLayout.setBackgroundResource(images[currentImageIndex]);
+        currentImageIndex = (currentImageIndex + 1) % house.getCompleteImageLinks().length;
+        String imageUrl = house.getCompleteImageLinks()[currentImageIndex];
+        ImageView imageView = findViewById(R.id.item_image);
+        Picasso.get().load(imageUrl).into(imageView);
+
 
     }
 
     private void showPreviousImage() {
-        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-        linearLayout.setBackgroundResource(images[currentImageIndex]);
+        currentImageIndex = (currentImageIndex - 1 + house.getCompleteImageLinks().length) % house.getCompleteImageLinks().length;
+        String imageUrl = house.getCompleteImageLinks()[currentImageIndex];
+        ImageView imageView = findViewById(R.id.item_image); // Remplacez R.id.imageView par l'ID réel de votre ImageView
+        Picasso.get().load(imageUrl).into(imageView);
 
     }
 
