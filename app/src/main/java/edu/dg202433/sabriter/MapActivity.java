@@ -53,8 +53,6 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         Configuration.getInstance().load(getApplicationContext() ,
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
         setContentView(R.layout.map_activity);
@@ -77,20 +75,6 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
 
-
-        /* GeoPoint startPoint = new GeoPoint(48.8583, 2.2944);
-        IMapController mapController = map.getController();
-        mapController.setZoom(9.5);
-        mapController.setCenter(startPoint); */
-
-
-        ArrayList<OverlayItem> items = new ArrayList<>();
-        OverlayItem home = new OverlayItem("La Casa", "Villa", new GeoPoint(37.7749,-122.4194));
-        items.add(home);
-        items.add(new OverlayItem("Eiffel Tower", "Tour Eiffel", new GeoPoint(47.8583, 2.3944)));
-
-
-
         TextView title = findViewById(R.id.title);
         title.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
@@ -101,8 +85,6 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         });
-
-
     }
 
     @Override
