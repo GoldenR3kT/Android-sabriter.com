@@ -50,6 +50,10 @@
             android:name="edu.dg202433.sabriter.PayementActivity"
             android:exported="true" />
 
+        <activity
+            android:name="edu.dg202433.sabriter.SearchActivity"
+            android:exported="true" />
+
 
 
     </application>

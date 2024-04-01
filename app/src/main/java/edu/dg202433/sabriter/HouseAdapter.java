@@ -49,13 +49,19 @@ public class HouseAdapter extends BaseAdapter {
         TextView name = layoutItem.findViewById(R.id.name);
         ImageView picture = layoutItem.findViewById(R.id.picture);
         RatingBar ratingBar = layoutItem.findViewById(R.id.rank);
+        TextView value = layoutItem.findViewById(R.id.valMaison);
 
         House house = houses.get(position);
         name.setText(house.getNom());
         picture.setImageResource(0);
-        ratingBar.setOnRatingBarChangeListener((ratingBar1, rating, fromUser) -> {
-            house.addNote(rating);
-            });
+        ratingBar.setRating(house.getMoyenneNote());
+
+        value.setText(String.valueOf(house.getMoyenneNote()));
+
+        ratingBar.setOnRatingBarChangeListener((ratingBar2, rating, fromUser) -> {
+            house.setNoteFromRatingBarChange(rating);
+            value.setText(String.valueOf(house.getMoyenneNote()));
+        });
 
 
 

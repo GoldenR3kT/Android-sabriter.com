@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
     private static List<House> HOUSE_LIST;
 
     private static List<House> HOUSE_LIST_FILTERED;
+
+    private static List<House> modifiedHouses = new ArrayList<>();
+
 
     CheckBox checkBox;
     CheckBox checkBox2;
@@ -112,63 +116,12 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
 
 
         searchButton.setOnClickListener(v -> {
-            setContentView(R.layout.activity_search);
-            TextView titleButton = findViewById(R.id.title);
-            titleButton.setOnClickListener(v1 -> {
-                Intent intent = new Intent(this, MainActivity.class);
-
-                startActivity(intent);
-            });
-            ListView listview2 = findViewById(R.id.listView);
-            HouseAdapter adapter2 = new HouseAdapter(HOUSE_LIST_FILTERED, this);
-            listview2.setAdapter(adapter2);
-
-
-
-            ImageButton buttonGPS2 = findViewById(R.id.mapButton);
-
-            buttonGPS2.setOnClickListener(v2 -> {
-                Intent intent = new Intent(this, MapActivity.class);
-                startActivity(intent);
-            });
-
-            ImageButton profileButton2 = findViewById(R.id.profileButton);
-            profileButton2.setOnClickListener(v3 -> {
-                Intent intent = new Intent(this, ProfileActivity.class);
-                startActivity(intent);
-            });
-
-            Spinner spinner = findViewById(R.id.spinner);
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tri, android.R.layout.simple_spinner_item);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinner.setAdapter(adapter);
-
-            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    String selectedItem = parent.getItemAtPosition(position).toString();
-
-                    if (selectedItem.equals("Prix croissant")) {
-                        Collections.sort(HOUSE_LIST_FILTERED, (house1, house2) -> Integer.compare(house1.getPrix(), house2.getPrix()));
-                        adapter2.notifyDataSetChanged();
-                    } else if (selectedItem.equals("Prix décroissant")) {
-                        Collections.sort(HOUSE_LIST_FILTERED, (house1, house2) -> Integer.compare(house2.getPrix(), house1.getPrix()));
-                        adapter2.notifyDataSetChanged();
-                    }
-                }
-
-
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                }
-
-            });
-
-
-
-
+            Intent intent = new Intent(this, SearchActivity.class);
+            intent.putExtra("houses", HOUSE_LIST_FILTERED.toArray(new House[HOUSE_LIST_FILTERED.size()]));
+            startActivity(intent);
         });
+
+
     }
 
 
@@ -177,10 +130,7 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
     public void onPostExecute(List<House> itemList) {
         HOUSE_LIST = itemList;
         HOUSE_LIST_FILTERED = itemList;
-        ListView listview = findViewById(R.id.listView);
 
-        HouseAdapter adapter = new HouseAdapter(HOUSE_LIST, this);
-        listview.setAdapter(adapter);
 
     }
 
@@ -207,6 +157,20 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
     private void resetFilter() {
         HOUSE_LIST_FILTERED.clear();
         HOUSE_LIST_FILTERED.addAll(HOUSE_LIST);
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (HOUSE_LIST_FILTERED != null) {
+            for (House modifiedHouse : modifiedHouses) {
+                int index = HOUSE_LIST_FILTERED.indexOf(modifiedHouse);
+                if (index != -1) {
+                    HOUSE_LIST_FILTERED.set(index, modifiedHouse);
+                }
+            }
+        }
     }
 
 

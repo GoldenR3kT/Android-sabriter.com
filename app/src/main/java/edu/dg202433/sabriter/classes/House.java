@@ -61,6 +61,7 @@ public class House implements HouseInterface {
         this.latitude = latitude;
         this.longitude = longitude;
         listNotes = new ArrayList<>();
+        listNotes.add(note);
     }
 
 
@@ -177,21 +178,31 @@ public class House implements HouseInterface {
         return sum / listNotes.size();
     }
 
+    public void setNoteFromRatingBarChange(float newNote) {
+        listNotes.add(newNote);
+        this.note = getMoyenneNote();
+    }
+
+
+
 
     @Override
-
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeString(nom);
         dest.writeString(type);
+        dest.writeInt(prix);
+        dest.writeFloat(note);
         dest.writeString(adresse);
         dest.writeInt(nombre_de_pieces);
         dest.writeInt(nombre_de_chambres);
         dest.writeFloat(superficie);
-        dest.writeFloat(note);
         dest.writeStringArray(images);
         dest.writeString(description);
-
+        dest.writeFloat(latitude);
+        dest.writeFloat(longitude);
     }
+
 
     public static final Parcelable.Creator<House> CREATOR = new Parcelable.Creator<House>() {
         @Override
@@ -216,6 +227,19 @@ public class House implements HouseInterface {
             return new House[size];
         }
     };
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        House other = (House) obj;
+        return id == other.id;
+    }
 
 
 
