@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,13 +32,10 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
 
     private static List<House> HOUSE_LIST_FILTERED;
 
-    private SearchActivity searchActivity;
 
-
-
-    CheckBox checkBox;
-    CheckBox checkBox2;
-    CheckBox checkBox3;
+    RadioButton checkBox;
+    RadioButton checkBox2;
+    RadioButton checkBox3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
         }
         String url = "https://raw.githubusercontent.com/GoldenR3kT/abri_data/main/data.json";
         new HttpAsyncGet<>(url, House.class, this, new ProgressDialog(this));
-
 
         ImageButton buttonGPS = findViewById(R.id.mapButton);
         Button searchButton = findViewById(R.id.searchButton);
@@ -70,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
         });
 
 
-        checkBox = findViewById(R.id.checkAppartment);
+        checkBox = findViewById(R.id.radioAppartment);
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 filterList();
@@ -80,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
         });
 
 
-        checkBox2 = findViewById(R.id.checkHouse);
+        checkBox2 = findViewById(R.id.radioHouse);
         checkBox2.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 filterList();
@@ -89,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
             }
         });
 
-        checkBox3 = findViewById(R.id.checkAbris);
+        checkBox3 = findViewById(R.id.radioAbris);
         checkBox3.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 filterList();
@@ -139,13 +136,14 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
         }
 
         if (!checkBox.isChecked() && !checkBox2.isChecked() && !checkBox3.isChecked()) {
-            HOUSE_LIST_FILTERED.addAll(originalList);
+            HOUSE_LIST_FILTERED.clear();
+            HOUSE_LIST_FILTERED.addAll(HOUSE_LIST);
         }
     }
 
 
 
-    private void resetFilter() {
+    public static void resetFilter() {
         HOUSE_LIST_FILTERED.clear();
         HOUSE_LIST_FILTERED.addAll(HOUSE_LIST);
     }

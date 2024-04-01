@@ -41,9 +41,9 @@ public class SearchActivity extends AppCompatActivity {
         HOUSE_LIST_FILTERED = new ArrayList<>(Arrays.asList(houses));
 
         titleButton.setOnClickListener(v1 -> {
-            Intent intentSearch = new Intent();
-            intentSearch.putExtra("modifiedHouses", HOUSE_LIST_FILTERED.stream().toArray(House[]::new));
-            finish();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+
         });
 
         ListView listview2 = findViewById(R.id.listView);

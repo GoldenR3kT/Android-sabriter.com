@@ -150,37 +150,43 @@
             app:layout_constraintStart_toStartOf="@id/form"
             app:layout_constraintEnd_toEndOf="@id/form">
 
-
-                <CheckBox
-                    android:id="@+id/checkAppartment"
+                <RadioGroup
+                    android:id="@+id/radioGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/check_appartment"
-                    android:textSize="20sp"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center"/>
+                    android:orientation="horizontal">
 
-                <CheckBox
-                    android:id="@+id/checkHouse"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/check_house"
-                    android:textSize="20sp"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="16dp"/>
+                        <RadioButton
+                            android:id="@+id/radioAppartment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/check_appartment"
+                            android:textSize="20sp"
+                            android:textColor="@color/white"
+                            android:layout_gravity="center"/>
 
-                <CheckBox
-                    android:id="@+id/checkAbris"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Abris"
-                    android:textSize="20sp"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="16dp"/>
+                        <RadioButton
+                            android:id="@+id/radioHouse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/check_house"
+                            android:textSize="20sp"
+                            android:textColor="@color/white"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="16dp"/>
 
+                        <RadioButton
+                            android:id="@+id/radioAbris"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Abris"
+                            android:textSize="20sp"
+                            android:textColor="@color/white"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="16dp"/>
+                </RadioGroup>
         </LinearLayout>
+
 
         <Button
             android:id="@+id/searchButton"

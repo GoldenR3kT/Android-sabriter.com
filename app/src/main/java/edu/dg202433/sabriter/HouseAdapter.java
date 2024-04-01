@@ -73,10 +73,8 @@ public class HouseAdapter extends BaseAdapter {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setMessage("Merci pour votre note :)");
 
-                // Définir le titre du dialogue
                 builder.setTitle("Note attribuée");
 
-                // Ajouter un bouton personnalisé avec un style
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
