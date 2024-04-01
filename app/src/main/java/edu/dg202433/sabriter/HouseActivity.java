@@ -61,8 +61,6 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
         house = getIntent().getParcelableExtra("selectedHouse");
         assert house != null;
 
-
-
         TextView house_title = findViewById(R.id.item_title);
         TextView house_description = findViewById(R.id.item_desc);
         TextView house_price = findViewById(R.id.item_price);
