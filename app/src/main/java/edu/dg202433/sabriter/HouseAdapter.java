@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import edu.dg202433.android_projet.R;
@@ -60,6 +62,7 @@ public class HouseAdapter extends BaseAdapter {
 
         House house = houses.get(position);
         name.setText(house.getNom());
+
         picture.setImageResource(0);
         ratingBar.setRating(house.getMoyenneNote());
 
@@ -88,6 +91,12 @@ public class HouseAdapter extends BaseAdapter {
                 notifyDataSetChanged();
             }
         });
+        String imageUrl = house.getCompleteImageLinks()[0];
+        Picasso.get().load(imageUrl).into(picture);
+        ratingBar.setOnRatingBarChangeListener((ratingBar1, rating, fromUser) -> {
+            house.addNote(rating);
+            });
+
 
 
 
@@ -96,6 +105,7 @@ public class HouseAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, HouseActivity.class);
                 intent.putExtra("id", house.getId());
+                intent.putExtra("selectedHouse", house);
                 mContext.startActivity(intent);
             }
         });
