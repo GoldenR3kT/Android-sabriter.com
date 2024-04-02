@@ -1,4 +1,4 @@
-package edu.dg202433.sabriter;
+package edu.dg202433.sabriter.classes;
 
 
 import android.app.AlertDialog;
@@ -20,6 +20,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import edu.dg202433.android_projet.R;
+import edu.dg202433.sabriter.HouseActivity;
 import edu.dg202433.sabriter.classes.House;
 
 public class HouseAdapter extends BaseAdapter {
@@ -101,7 +102,6 @@ public class HouseAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, HouseActivity.class);
-                intent.putExtra("id", house.getId());
                 intent.putExtra("selectedHouse", house);
                 mContext.startActivity(intent);
             }

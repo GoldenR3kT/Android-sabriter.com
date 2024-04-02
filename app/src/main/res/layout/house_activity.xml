@@ -58,8 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/item_image"
-            android:scaleType="centerCrop"
-            android:src="@drawable/tente_test1" /> <!-- Image par défaut -->
+            android:scaleType="centerCrop"/>
 
         <Button
             android:id="@+id/slide_left"

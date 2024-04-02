@@ -59,7 +59,7 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
         new HttpAsyncGet<>(url, House.class, this, new ProgressDialog(this));
 
         house = getIntent().getParcelableExtra("selectedHouse");
-        assert house != null;
+
 
         TextView house_title = findViewById(R.id.item_title);
         TextView house_description = findViewById(R.id.item_desc);
@@ -98,6 +98,7 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
 
         Button buyButton = findViewById(R.id.buy_button);
 
+
         boolean isItemPurchased = getIntent().getBooleanExtra("isItemPurchased", false);
 
         if (isItemPurchased) {
@@ -105,15 +106,17 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
             buyButton.setEnabled(false);
         } else {
             buyButton.setText("ACHETER");
-            buyButton.setOnClickListener(v -> {
-                buyButton.setText("ACHETÉ");
-                buyButton.setEnabled(false);
-            });
         }
+
         buyButton.setOnClickListener(v -> {
+
             Intent intent = new Intent(this, PayementActivity.class);
             startActivity(intent);
+            buyButton.setText("ACHETÉ");
+            buyButton.setEnabled(false);
         });
+
+
 
     }
 

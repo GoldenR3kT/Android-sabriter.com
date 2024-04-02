@@ -8,7 +8,7 @@
     <string name="check_house">Maison</string>
     <string name="button_search">Rechercher</string>
     <string name="ask_max_budget">Budget maximum</string>
-    <string name="ask_location">Entrer votre localisation</string>
+    <string name="ask_location">Entrer une ville</string>
     <string name="title_location">Localisation</string>
     <string name="title_logement">Trouver un logement</string>
     <string name="myapp">SABRITER</string>
@@ -25,8 +25,6 @@
     <string name="vous_n_avez_pas_de_compte">Vous n\'avez pas de compte ?</string>
 
     <string-array name="tri">
-        <item>Plus récent</item>
-        <item>Plus ancien</item>
         <item>Prix croissant</item>
         <item>Prix décroissant</item>
     </string-array>

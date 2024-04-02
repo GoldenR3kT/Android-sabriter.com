@@ -148,27 +148,7 @@ public class House implements HouseInterface, Parcelable{
     }
 
     public String getLocalisation() { return localisation; }
-    public void setName(String nom) {
-        this.nom = nom;
-    }
 
-    public void setAddress(String adresse) {
-        this.adresse = adresse;
-    }
-
-
-    public void setNote(float value) {
-        this.note = value;
-    }
-
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void addNote(float note) {
-        listNotes.add(note);
-    }
 
     public float getMoyenneNote() {
         if (listNotes.isEmpty()) {
@@ -234,17 +214,6 @@ public class House implements HouseInterface, Parcelable{
     };
 
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        House other = (House) obj;
-        return id == other.id;
-    }
 
 
 

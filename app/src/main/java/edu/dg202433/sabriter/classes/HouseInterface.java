@@ -15,9 +15,7 @@ public interface HouseInterface extends Parcelable {
     float getSuperficie();
     float getNote();
     String getLocalisation();
-
-    void setName(String nom);
-    void setAddress(String adresse);
-    void setNote(float value);
-    void setDescription(String description);
+    float getLatitude();
+    float getLongitude();
 }
+

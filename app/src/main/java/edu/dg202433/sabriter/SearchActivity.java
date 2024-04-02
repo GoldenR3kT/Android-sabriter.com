@@ -6,12 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -23,6 +21,7 @@ import java.util.List;
 import edu.dg202433.android_projet.R;
 import edu.dg202433.sabriter.authentification.ProfileActivity;
 import edu.dg202433.sabriter.classes.House;
+import edu.dg202433.sabriter.classes.HouseAdapter;
 
 public class SearchActivity extends AppCompatActivity {
 
