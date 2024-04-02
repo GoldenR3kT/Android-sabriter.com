@@ -22,6 +22,8 @@ public interface HouseInterface extends Parcelable {
 
     float getNote();
 
+    String getLocalisation();
+
     void setName(String name);
     void setAddress(String address);
     void setNote(float value);

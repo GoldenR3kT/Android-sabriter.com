@@ -93,9 +93,6 @@ public class HouseAdapter extends BaseAdapter {
         });
         String imageUrl = house.getCompleteImageLinks()[0];
         Picasso.get().load(imageUrl).into(picture);
-        ratingBar.setOnRatingBarChangeListener((ratingBar1, rating, fromUser) -> {
-            house.addNote(rating);
-            });
 
 
 

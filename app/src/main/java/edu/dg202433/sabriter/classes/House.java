@@ -29,6 +29,8 @@ public class House implements HouseInterface, Parcelable{
     private String description;
     private final float latitude;
     private final float longitude;
+
+    private final String localisation;
     @JsonIgnore
     private String[] completeImageLinks;
 
@@ -46,7 +48,8 @@ public class House implements HouseInterface, Parcelable{
                  @JsonProperty("images") String[] images,
                  @JsonProperty("description") String description,
                  @JsonProperty("latitude") float latitude,
-                 @JsonProperty("longitude") float longitude) {
+                 @JsonProperty("longitude") float longitude,
+                 @JsonProperty("localisation") String localisation) {
         this.id = id;
         this.nom = nom;
         this.type = type;
@@ -60,6 +63,7 @@ public class House implements HouseInterface, Parcelable{
         this.description = description;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.localisation = localisation;
         listNotes = new ArrayList<>();
         listNotes.add(note);
     }
@@ -145,6 +149,9 @@ public class House implements HouseInterface, Parcelable{
         return longitude;
     }
 
+    public String getLocalisation() {
+        return localisation;
+    }
     public void setName(String nom) {
         this.nom = nom;
     }
@@ -201,6 +208,7 @@ public class House implements HouseInterface, Parcelable{
         dest.writeString(description);
         dest.writeFloat(latitude);
         dest.writeFloat(longitude);
+        dest.writeString(localisation);
     }
 
 
@@ -220,7 +228,8 @@ public class House implements HouseInterface, Parcelable{
             String description = in.readString();
             float latitude = in.readFloat();
             float longitude = in.readFloat();
-            return new House(id, nom, type, prix, note, adresse, nombre_de_pieces, nombre_de_chambres, superficie, images, description, latitude, longitude);
+            String localisation = in.readString();
+            return new House(id, nom, type, prix, note, adresse, nombre_de_pieces, nombre_de_chambres, superficie, images, description, latitude, longitude, localisation);
         }
         @Override
         public House[] newArray(int size) {
