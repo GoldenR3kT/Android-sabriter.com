@@ -73,48 +73,23 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
 
 
         checkBox = findViewById(R.id.radioAppartment);
-        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                filterList();
-            } else {
-                resetFilter();
-            }
-        });
-
-
         checkBox2 = findViewById(R.id.radioHouse);
-        checkBox2.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                filterList();
-            } else {
-                resetFilter();
-            }
-        });
-
         checkBox3 = findViewById(R.id.radioAbris);
-        checkBox3.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                filterList();
-            } else {
-                resetFilter();
-            }
-        });
+
 
         budgetEditText = findViewById(R.id.locationBudgetEditText);
         locationEditText = findViewById(R.id.locationEditText);
 
 
 
-
         searchButton.setOnClickListener(v -> {
-
-            if(!budgetEditText.getText().toString().isEmpty() || !locationEditText.getText().toString().isEmpty()) {
-                filterList();
-            }
+            filterList();
             Intent intent = new Intent(this, SearchActivity.class);
             intent.putExtra("houses", HOUSE_LIST_FILTERED.toArray(new House[HOUSE_LIST_FILTERED.size()]));
             startActivity(intent);
         });
+
+
 
 
     }
@@ -129,40 +104,48 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
     }
 
     private void filterList() {
-        List<House> originalList = new ArrayList<>(HOUSE_LIST);
+        List<House> filteredList = new ArrayList<>();
 
-        HOUSE_LIST_FILTERED.clear();
+        for (House house : HOUSE_LIST) {
+            boolean isHouseValid = true;
 
-        for (House house : originalList) {
-            if ((checkBox.isChecked() && house.getType().equals("Appartement")) ||
-                    (checkBox2.isChecked() && house.getType().equals("Maison")) ||
-                    (checkBox3.isChecked() && house.getType().equals("Abris"))) {
-                HOUSE_LIST_FILTERED.add(house);
+            if (checkBox.isChecked()) {
+                isHouseValid = isHouseValid && house.getType().equals("Appartement");
+            }
+            if (checkBox2.isChecked()) {
+                isHouseValid = isHouseValid && house.getType().equals("Maison");
+            }
+            if (checkBox3.isChecked()) {
+                isHouseValid = isHouseValid && house.getType().equals("Abris");
+            }
+
+            if (!budgetEditText.getText().toString().isEmpty()) {
+                int budgetValue = Integer.parseInt(budgetEditText.getText().toString());
+                isHouseValid = isHouseValid && house.getPrix() <= budgetValue;
+            }
+
+            if (!locationEditText.getText().toString().isEmpty()) {
+                String locationValue = locationEditText.getText().toString().toLowerCase();
+                isHouseValid = isHouseValid && house.getLocalisation().toLowerCase().contains(locationValue);
+            }
+
+            if (isHouseValid) {
+                filteredList.add(house);
             }
         }
 
-        if (!checkBox.isChecked() && !checkBox2.isChecked() && !checkBox3.isChecked()) {
-            HOUSE_LIST_FILTERED.clear();
-            HOUSE_LIST_FILTERED.addAll(HOUSE_LIST);
-        }
+        HOUSE_LIST_FILTERED = filteredList;
 
-        if (!budgetEditText.getText().toString().isEmpty()) {
-            int budgetValue = Integer.parseInt(budgetEditText.getText().toString());
-            HOUSE_LIST_FILTERED.removeIf(house -> house.getPrix() > budgetValue);
-        }
-
-        if (!locationEditText.getText().toString().isEmpty()) {
-            String locationValue = locationEditText.getText().toString();
-            HOUSE_LIST_FILTERED.removeIf(house -> !house.getLocalisation().toLowerCase().contains(locationValue.toLowerCase()));
+        if (HOUSE_LIST_FILTERED.isEmpty()) {
+            HOUSE_LIST_FILTERED = new ArrayList<>(HOUSE_LIST);
         }
     }
 
 
 
-    public static void resetFilter() {
-        HOUSE_LIST_FILTERED.clear();
-        HOUSE_LIST_FILTERED.addAll(HOUSE_LIST);
-    }
+
+
+
 
 
 }
