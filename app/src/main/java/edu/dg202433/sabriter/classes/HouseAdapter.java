@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +13,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -74,21 +77,9 @@ public class HouseAdapter extends BaseAdapter {
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 house.setNoteFromRatingBarChange(rating);
                 modifiedHouses.add(house);
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setMessage("Merci pour votre note :)");
-
-                builder.setTitle("Note attribuée");
-
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                        notifyDataSetChanged();                    }
-                });
-
-                AlertDialog alertDialog = builder.create();
-
-
-                alertDialog.show();
+                Toast toast = Toast.makeText(mContext, "Merci pour votre note à très bientôt !", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 100);
+                toast.show();
                 notifyDataSetChanged();
             }
         });
