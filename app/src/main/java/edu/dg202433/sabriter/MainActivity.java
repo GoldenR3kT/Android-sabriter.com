@@ -37,6 +37,10 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
     RadioButton checkBox;
     RadioButton checkBox2;
     RadioButton checkBox3;
+
+    EditText budgetEditText;
+
+    EditText locationEditText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,16 +100,17 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
             }
         });
 
-        EditText budget = findViewById(R.id.locationBudgetEditText);
-        budget.setOnFocusChangeListener((v, hasFocus) -> {
-            if (!hasFocus) {
-                HOUSE_LIST_FILTERED.removeIf(house -> house.getPrix() > Integer.parseInt(budget.getText().toString()));
-            }
-        });
+        budgetEditText = findViewById(R.id.locationBudgetEditText);
+        locationEditText = findViewById(R.id.locationEditText);
+
 
 
 
         searchButton.setOnClickListener(v -> {
+
+            if(!budgetEditText.getText().toString().isEmpty() || !locationEditText.getText().toString().isEmpty()) {
+                filterList();
+            }
             Intent intent = new Intent(this, SearchActivity.class);
             intent.putExtra("houses", HOUSE_LIST_FILTERED.toArray(new House[HOUSE_LIST_FILTERED.size()]));
             startActivity(intent);
@@ -139,6 +144,16 @@ public class MainActivity extends AppCompatActivity implements PostExecuteActivi
         if (!checkBox.isChecked() && !checkBox2.isChecked() && !checkBox3.isChecked()) {
             HOUSE_LIST_FILTERED.clear();
             HOUSE_LIST_FILTERED.addAll(HOUSE_LIST);
+        }
+
+        if (!budgetEditText.getText().toString().isEmpty()) {
+            int budgetValue = Integer.parseInt(budgetEditText.getText().toString());
+            HOUSE_LIST_FILTERED.removeIf(house -> house.getPrix() > budgetValue);
+        }
+
+        if (!locationEditText.getText().toString().isEmpty()) {
+            String locationValue = locationEditText.getText().toString();
+            HOUSE_LIST_FILTERED.removeIf(house -> !house.getLocalisation().toLowerCase().contains(locationValue.toLowerCase()));
         }
     }
 

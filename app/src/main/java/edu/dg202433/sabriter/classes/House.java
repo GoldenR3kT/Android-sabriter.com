@@ -49,7 +49,8 @@ public class House implements HouseInterface, Parcelable{
                  @JsonProperty("description") String description,
                  @JsonProperty("latitude") float latitude,
                  @JsonProperty("longitude") float longitude,
-                 @JsonProperty("localisation") String localisation) {
+                 @JsonProperty("localisation") String localisation
+    ) {
         this.id = id;
         this.nom = nom;
         this.type = type;
@@ -67,6 +68,7 @@ public class House implements HouseInterface, Parcelable{
         listNotes = new ArrayList<>();
         listNotes.add(note);
     }
+
 
 
     @Override
@@ -101,10 +103,6 @@ public class House implements HouseInterface, Parcelable{
 
     public String getType() {
         return type;
-    }
-
-    public String getAdresse() {
-        return adresse;
     }
 
     public int getPrix() {
@@ -149,9 +147,7 @@ public class House implements HouseInterface, Parcelable{
         return longitude;
     }
 
-    public String getLocalisation() {
-        return localisation;
-    }
+    public String getLocalisation() { return localisation; }
     public void setName(String nom) {
         this.nom = nom;
     }
