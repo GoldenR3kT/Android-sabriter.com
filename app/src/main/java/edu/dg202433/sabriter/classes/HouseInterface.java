@@ -3,7 +3,6 @@ package edu.dg202433.sabriter.classes;
 import android.os.Parcelable;
 
 public interface HouseInterface extends Parcelable {
-
     int getId();
     String getNom();
     String getType();

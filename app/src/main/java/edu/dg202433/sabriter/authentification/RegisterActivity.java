@@ -17,25 +17,42 @@ import com.google.firebase.auth.FirebaseUser;
 
 import edu.dg202433.android_projet.R;
 
+/**
+ * RegisterActivity permet à un nouvel utilisateur de s'inscrire à l'application en créant un compte à l'aide de Firebase Authentication.
+ * L'utilisateur peut saisir son adresse e-mail et son mot de passe pour créer un nouveau compte.
+ */
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = "RegisterActivity";
+
+    /**
+     * Instance de FirebaseAuth pour gérer l'authentification.
+     */
     private FirebaseAuth mAuth;
 
+    /**
+     * Méthode appelée lors de la création de l'activité.
+     * Initialise les éléments de l'interface utilisateur et configure le bouton d'inscription.
+     *
+     * @param savedInstanceState Données permettant de reconstruire l'état de l'activité si elle est recréée.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
 
+        // Configuration du bouton d'inscription
         Button registerButton = findViewById(R.id.searchButton);
         registerButton.setOnClickListener(v -> {
             register();
         });
-
-
     }
 
+    /**
+     * Méthode appelée au démarrage de l'activité.
+     * Vérifie si un utilisateur est déjà connecté. Si oui, redirige vers LoginActivity.
+     */
     @Override
     public void onStart() {
         super.onStart();
@@ -45,14 +62,11 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-
-
-    private void updateUI(FirebaseUser currentUser) {
-        if (currentUser != null) {
-            setContentView(R.layout.activity_login);
-        }
-    }
-
+    /**
+     * Méthode pour gérer le processus d'inscription d'un nouvel utilisateur.
+     * Récupère l'adresse e-mail et le mot de passe saisis par l'utilisateur,
+     * puis tente de créer un nouveau compte avec Firebase Authentication.
+     */
     private void register() {
         String email = ((EditText) findViewById(R.id.email)).getText().toString();
         String password = ((EditText) findViewById(R.id.password)).getText().toString();
@@ -75,5 +89,16 @@ public class RegisterActivity extends AppCompatActivity {
                 });
     }
 
-
+    /**
+     * Met à jour l'interface utilisateur en fonction de l'utilisateur connecté.
+     * Si l'utilisateur est connecté avec succès, redirige vers LoginActivity.
+     *
+     * @param currentUser Utilisateur actuellement connecté.
+     */
+    private void updateUI(FirebaseUser currentUser) {
+        if (currentUser != null) {
+            setContentView(R.layout.activity_login);
+        }
+    }
 }
+

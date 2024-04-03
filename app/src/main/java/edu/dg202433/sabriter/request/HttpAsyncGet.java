@@ -44,7 +44,6 @@ public class HttpAsyncGet<T>{
         Executors.newSingleThreadExecutor().execute( runnable );
     }
 
-
     public void doInBackGround(String urlAddress){
         // get the jsonStr to parse
         String jsonStr = webService.makeServiceCall(urlAddress);

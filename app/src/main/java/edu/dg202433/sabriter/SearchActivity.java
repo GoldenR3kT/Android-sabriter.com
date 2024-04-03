@@ -23,6 +23,10 @@ import edu.dg202433.sabriter.authentification.ProfileActivity;
 import edu.dg202433.sabriter.classes.House;
 import edu.dg202433.sabriter.classes.HouseAdapter;
 
+/**
+ * La classe SearchActivity est responsable de l'affichage des résultats de recherche des maisons.
+ * Elle affiche une liste de maisons filtrées selon les critères de recherche sélectionnés par l'utilisateur.
+ */
 public class SearchActivity extends AppCompatActivity {
 
     private static List<House> HOUSE_LIST_FILTERED;
@@ -30,6 +34,13 @@ public class SearchActivity extends AppCompatActivity {
 
     private HouseAdapter adapter;
 
+    /**
+     * Méthode appelée lors de la création de l'activité.
+     * Initialise l'interface utilisateur et récupère les maisons filtrées à afficher.
+     *
+     * @param savedInstanceState données de l'état de l'activité sauvegardées lors de la rotation de l'écran, etc.
+     */
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
@@ -42,32 +53,28 @@ public class SearchActivity extends AppCompatActivity {
         titleButton.setOnClickListener(v1 -> {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-
         });
 
-        ListView listview2 = findViewById(R.id.listView);
+        ListView listView = findViewById(R.id.listView);
         adapter = new HouseAdapter(HOUSE_LIST_FILTERED, this, modifiedHouses);
-        listview2.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
-
-
-        ImageButton buttonGPS2 = findViewById(R.id.mapButton);
-
-        buttonGPS2.setOnClickListener(v2 -> {
+        ImageButton buttonGPS = findViewById(R.id.mapButton);
+        buttonGPS.setOnClickListener(v2 -> {
             Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
         });
 
-        ImageButton profileButton2 = findViewById(R.id.profileButton);
-        profileButton2.setOnClickListener(v3 -> {
+        ImageButton profileButton = findViewById(R.id.profileButton);
+        profileButton.setOnClickListener(v3 -> {
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         });
 
         Spinner spinner = findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.tri, android.R.layout.simple_spinner_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter2);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tri, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -76,24 +83,22 @@ public class SearchActivity extends AppCompatActivity {
 
                 if (selectedItem.equals("Prix croissant")) {
                     Collections.sort(HOUSE_LIST_FILTERED, (house1, house2) -> Integer.compare(house1.getPrix(), house2.getPrix()));
-                    adapter2.notifyDataSetChanged();
+                    adapter.notifyDataSetChanged();
                 } else if (selectedItem.equals("Prix décroissant")) {
                     Collections.sort(HOUSE_LIST_FILTERED, (house1, house2) -> Integer.compare(house2.getPrix(), house1.getPrix()));
-                    adapter2.notifyDataSetChanged();
+                    adapter.notifyDataSetChanged();
                 }
             }
-
-
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
-
         });
-
-
     }
 
+    /**
+     * Met à jour la liste principale des maisons avec les maisons modifiées.
+     */
     private void updateMainList() {
         for (House modifiedHouse : modifiedHouses) {
             int index = HOUSE_LIST_FILTERED.indexOf(modifiedHouse);
@@ -104,11 +109,14 @@ public class SearchActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-
+    /**
+     * Méthode appelée lorsque l'activité entre à nouveau en premier plan.
+     * Met à jour la liste principale des maisons.
+     */
     @Override
     protected void onResume() {
         super.onResume();
         updateMainList();
     }
-
 }
+

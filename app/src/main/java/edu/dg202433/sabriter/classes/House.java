@@ -10,30 +10,28 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-
+/**
+ * La classe House représente une maison avec ses différentes caractéristiques telles que l'ID, le nom, le type, le prix, etc.
+ * Implémente l'interface Parcelable pour permettre le passage d'instances entre les composants Android via les Intent.
+ */
 public class House implements HouseInterface, Parcelable{
     private final int id;
     private String nom;
-
     private final String type;
     private final int prix;
     private float note;
     private List<Float> listNotes;
-
     private String adresse;
     private final int nombre_de_pieces;
     private final int nombre_de_chambres;
     private final float superficie;
     private final String[] images;
-
     private String description;
     private final float latitude;
     private final float longitude;
-
     private final String localisation;
     @JsonIgnore
     private String[] completeImageLinks;
-
 
     @JsonCreator
     public House(@JsonProperty("id") int id,
@@ -69,8 +67,6 @@ public class House implements HouseInterface, Parcelable{
         listNotes.add(note);
     }
 
-
-
     @Override
     public int describeContents() {
         return 0;
@@ -95,7 +91,6 @@ public class House implements HouseInterface, Parcelable{
     public int getId() {
         return id;
     }
-
 
     public String getNom() {
         return nom;
@@ -126,7 +121,6 @@ public class House implements HouseInterface, Parcelable{
         return description;
     }
 
-
     public int getNombre_de_chambres() {
         return nombre_de_chambres;
     }
@@ -149,7 +143,6 @@ public class House implements HouseInterface, Parcelable{
 
     public String getLocalisation() { return localisation; }
 
-
     public float getMoyenneNote() {
         if (listNotes.isEmpty()) {
             return 0.0f;
@@ -165,9 +158,6 @@ public class House implements HouseInterface, Parcelable{
         listNotes.add(newNote);
         this.note = getMoyenneNote();
     }
-
-
-
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
@@ -186,7 +176,6 @@ public class House implements HouseInterface, Parcelable{
         dest.writeFloat(longitude);
         dest.writeString(localisation);
     }
-
 
     public static final Parcelable.Creator<House> CREATOR = new Parcelable.Creator<House>() {
         @Override
@@ -212,9 +201,4 @@ public class House implements HouseInterface, Parcelable{
             return new House[size];
         }
     };
-
-
-
-
-
 }

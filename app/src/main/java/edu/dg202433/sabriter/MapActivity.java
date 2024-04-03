@@ -37,35 +37,42 @@ import edu.dg202433.sabriter.classes.House;
 import edu.dg202433.sabriter.request.HttpAsyncGet;
 import edu.dg202433.sabriter.request.PostExecuteActivity;
 
+/**
+ * La classe MapActivity est responsable de l'affichage d'une carte OpenStreetMap avec des marqueurs représentant les maisons disponibles.
+ * Elle utilise la bibliothèque osmdroid pour afficher la carte et gérer les marqueurs.
+ */
 public class MapActivity extends AppCompatActivity implements LocationListener, PostExecuteActivity<House> {
 
-    private MapView map;
-    private LocationManager locationManager;
-    private static final int REQUEST_LOCATION_PERMISSION = 1;
+    private MapView map; // Vue de la carte
+    private LocationManager locationManager; // Gestionnaire de localisation
+    private static final int REQUEST_LOCATION_PERMISSION = 1; // Code de demande de permission de localisation
 
-    private static final List<House> HOUSE_LIST = new ArrayList<>(); //the complete list
+    private static final List<House> HOUSE_LIST = new ArrayList<>(); // Liste des maisons disponibles
 
-    ArrayList<OverlayItem> items = new ArrayList<>();
+    ArrayList<OverlayItem> items = new ArrayList<>(); // Liste des marqueurs pour les maisons
 
+    /**
+     * Méthode appelée lors de la création de l'activité.
+     * Initialise la carte, demande la permission de localisation et récupère les données des maisons disponibles.
+     *
+     * @param savedInstanceState données de l'état de l'activité sauvegardées lors de la rotation de l'écran, etc.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Configuration.getInstance().load(getApplicationContext() ,
+        Configuration.getInstance().load(getApplicationContext(),
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
         setContentView(R.layout.activity_map);
 
         String url = "https://raw.githubusercontent.com/GoldenR3kT/abri_data/main/data.json";
-        //todo: try to change context from MainActivity.this in getApplicationContext()
         new HttpAsyncGet<>(url, House.class, this, new ProgressDialog(this));
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-            // Demander des mises à jour de localisation
         } else {
-            // Demander la permission
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
         }
 
@@ -85,18 +92,29 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
         });
     }
 
+    /**
+     * Méthode appelée lorsque l'activité passe en pause.
+     */
     @Override
     public void onPause() {
         super.onPause();
         map.onPause();
     }
 
+    /**
+     * Méthode appelée lorsque l'activité reprend.
+     */
     @Override
     public void onResume() {
         super.onResume();
         map.onResume();
     }
 
+    /**
+     * Méthode appelée lorsque la localisation change.
+     *
+     * @param location Nouvelle localisation.
+     */
     @Override
     public void onLocationChanged(Location location) {
         double latitude = location.getLatitude();
@@ -106,28 +124,44 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
         locationManager.removeUpdates(this);
     }
 
+    /**
+     * Méthode pour définir le point de départ de la carte.
+     *
+     * @param startPoint Point de départ de la carte.
+     */
     private void setMapStartPoint(GeoPoint startPoint) {
         map.getController().setZoom(9.5);
         map.getController().setCenter(startPoint);
     }
 
+    /**
+     * Méthode appelée lorsqu'une demande de permission est accordée ou refusée.
+     *
+     * @param requestCode  Code de la demande de permission.
+     * @param permissions  Permissions demandées.
+     * @param grantResults Résultats de la demande de permission.
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission accordée, démarrer les mises à jour de localisation
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
                 }
             } else {
-                // Permission refusée, définir la localisation par défaut
-                GeoPoint startPoint = new GeoPoint(48.8583, 2.2944);
+                GeoPoint startPoint = new GeoPoint(48.8583, 2.2944); // Position par défaut (Paris)
                 setMapStartPoint(startPoint);
             }
         }
     }
 
+    /**
+     * Méthode appelée lorsque la récupération des données des maisons est terminée.
+     * Initialise les marqueurs sur la carte pour chaque maison.
+     *
+     * @param itemList Liste des maisons récupérées.
+     */
     @Override
     public void onPostExecute(List<House> itemList) {
         HOUSE_LIST.addAll(itemList);
@@ -151,15 +185,12 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
                 ImageView imageView = new ImageView(MapActivity.this);
                 Picasso.get().load(selectedHouse.getCompleteImageLinks()[0]).into(imageView);
 
-
                 imageView.setAdjustViewBounds(true);
                 imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 imageView.setMaxWidth(700);
                 imageView.setMaxHeight(550);
 
                 alertDialogBuilder.setView(imageView);
-
-
 
                 alertDialogBuilder
                         .setMessage(selectedHouse.getDescription())
@@ -172,7 +203,6 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
                                 startActivity(intent);
                             }
                         });
-
 
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
@@ -189,3 +219,4 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
         map.getOverlays().add(mOverlay);
     }
 }
+
