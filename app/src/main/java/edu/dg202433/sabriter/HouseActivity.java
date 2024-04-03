@@ -94,6 +94,7 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
         Button slideLeftButton = findViewById(R.id.slide_left);
         Button slideRightButton = findViewById(R.id.slide_right);
 
+        // Configuration des écouteurs de clic pour les boutons
         slideLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,8 +109,9 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
             }
         });
 
+        // Affichage de la première image de la maison avec Picasso
         String imageUrl = house.getCompleteImageLinks()[currentImageIndex];
-        ImageView imageView = findViewById(R.id.item_image); // Remplacez R.id.imageView par l'ID réel de votre ImageView
+        ImageView imageView = findViewById(R.id.item_image);
         Picasso.get().load(imageUrl).into(imageView);
 
         Button buyButton = findViewById(R.id.buy_button);
@@ -131,8 +133,7 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
         });
     }
 
-    // Méthodes pour afficher les images précédentes
-
+    // Méthode pour afficher les images précédentes
     private void showNextImage() {
         currentImageIndex = (currentImageIndex + 1) % house.getCompleteImageLinks().length;
         String imageUrl = house.getCompleteImageLinks()[currentImageIndex];
@@ -140,8 +141,7 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
         Picasso.get().load(imageUrl).into(imageView);
     }
 
-    // Méthodes pour afficher les images suivantes
-
+    // Méthode pour afficher les images suivantes
     private void showPreviousImage() {
         currentImageIndex = (currentImageIndex - 1 + house.getCompleteImageLinks().length) % house.getCompleteImageLinks().length;
         String imageUrl = house.getCompleteImageLinks()[currentImageIndex];
