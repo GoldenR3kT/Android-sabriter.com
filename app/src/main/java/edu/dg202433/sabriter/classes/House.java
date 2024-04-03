@@ -212,4 +212,17 @@ public class House implements HouseInterface, Parcelable{
             return new House[size];
         }
     };
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        House other = (House) obj;
+        return id == other.id;
+    }
+
 }
