@@ -50,6 +50,8 @@ public class SearchActivity extends AppCompatActivity {
         House[] houses = Arrays.copyOf(parcelables, parcelables.length, House[].class);
         HOUSE_LIST_FILTERED = new ArrayList<>(Arrays.asList(houses));
 
+        Collections.sort(HOUSE_LIST_FILTERED, (house1, house2) -> Integer.compare(house1.getPrix(), house2.getPrix()));
+
         titleButton.setOnClickListener(v1 -> {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
