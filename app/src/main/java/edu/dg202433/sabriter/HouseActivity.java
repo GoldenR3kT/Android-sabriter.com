@@ -7,13 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.util.List;
 
@@ -32,7 +30,7 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.house_activity);
+        setContentView(R.layout.activity_house);
 
 
         TextView title = findViewById(R.id.title);
@@ -66,12 +64,14 @@ public class HouseActivity extends AppCompatActivity implements PostExecuteActiv
         TextView house_price = findViewById(R.id.item_price);
         TextView house_chambers = findViewById(R.id.item_chambers);
         TextView house_pieces = findViewById(R.id.item_pieces);
+        TextView house_space = findViewById(R.id.item_space);
 
         house_title.setText(house.getNom());
         house_description.setText(house.getDescription());
         house_price.setText(house.getPrix() + "€");
         house_chambers.setText(house.getNombre_de_chambres() + " chambres");
         house_pieces.setText(house.getNombre_de_pieces() + " pièces");
+        house_space.setText(house.getSuperficie() + " m²");
 
 
         Button slideLeftButton = findViewById(R.id.slide_left);

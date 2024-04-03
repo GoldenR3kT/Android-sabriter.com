@@ -19,10 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.preference.PreferenceManager;
 
-import com.google.android.material.animation.DrawableAlphaProperty;
 import com.squareup.picasso.Picasso;
 
-import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
@@ -55,7 +53,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
 
         Configuration.getInstance().load(getApplicationContext() ,
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
-        setContentView(R.layout.map_activity);
+        setContentView(R.layout.activity_map);
 
         String url = "https://raw.githubusercontent.com/GoldenR3kT/abri_data/main/data.json";
         //todo: try to change context from MainActivity.this in getApplicationContext()
