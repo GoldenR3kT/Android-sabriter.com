@@ -99,19 +99,33 @@ public class HouseAdapter extends BaseAdapter {
         ratingBar.setRating(house.getMoyenneNote());
         value.setText(String.valueOf(house.getMoyenneNote()));
 
+        if (house.hasVoted()) {
+            ratingBar.setRating(house.getMoyenneNote());
+            ratingBar.setIsIndicator(true);
+        } else {
+            ratingBar.setRating(house.getMoyenneNote());
+            ratingBar.setIsIndicator(false);
+        }
+
+
         // Gestion de l'événement de changement de note de la maison
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                house.setNoteFromRatingBarChange(rating);
-                modifiedHouses.add(house); // Ajout de la maison modifiée à la liste
-                // Affichage d'un message de remerciement
-                Toast toast = Toast.makeText(mContext, "Merci pour votre note à très bientôt !", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 100);
-                toast.show();
-                notifyDataSetChanged(); // Notification de l'adaptateur pour mettre à jour la vue
+                if (!house.hasVoted()) {
+                    house.setNoteFromRatingBarChange(rating);
+                    house.setHasVoted(true); // Marquer que l'utilisateur a voté pour cette maison
+                    modifiedHouses.add(house); // Ajouter la maison modifiée à la liste
+                    notifyDataSetChanged(); // Notifier l'adaptateur pour mettre à jour la vue
+                    // Affichage d'un message de remerciement
+                    Toast.makeText(mContext, "Merci pour votre note !", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Affichage d'un message indiquant que l'utilisateur a déjà voté
+                    Toast.makeText(mContext, "Vous avez déjà voté pour cette maison.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
 
         // Chargement de l'image de la maison à partir de l'URL et affichage dans l'ImageView
         String imageUrl = house.getCompleteImageLinks()[0];

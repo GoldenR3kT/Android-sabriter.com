@@ -30,6 +30,8 @@ public class House implements HouseInterface, Parcelable{
     private final float latitude;
     private final float longitude;
     private final String localisation;
+
+    private boolean hasVoted;
     @JsonIgnore
     private String[] completeImageLinks;
 
@@ -65,6 +67,7 @@ public class House implements HouseInterface, Parcelable{
         this.localisation = localisation;
         listNotes = new ArrayList<>();
         listNotes.add(note);
+        hasVoted = false;
     }
 
     @Override
@@ -151,12 +154,20 @@ public class House implements HouseInterface, Parcelable{
         for (Float rating : listNotes) {
             sum += rating;
         }
-        return sum / listNotes.size();
-    }
+        float moyenne = sum / listNotes.size();
+        return Float.parseFloat(String.format("%.1f", moyenne));    }
 
     public void setNoteFromRatingBarChange(float newNote) {
         listNotes.add(newNote);
         this.note = getMoyenneNote();
+    }
+
+    public boolean hasVoted() {
+        return hasVoted;
+    }
+
+    public void setHasVoted(boolean hasVoted) {
+        this.hasVoted = hasVoted;
     }
 
     @Override
